@@ -1,3 +1,4 @@
+import {ButtonModule} from 'primeng/button';
 import { Component } from '@angular/core';
 
 @Component({
