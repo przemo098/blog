@@ -5,16 +5,17 @@
     src="../assets/icons/menu-button.svg"
   />
 
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">P.Kaminsky</a>
 </nav>
 
 <div class="container">
   <div class="row">
     <div id="mySidenav" class="sidenav" [ngStyle]="{ width: navWidth }">
       <a routerLink="/about">About</a>
-      <a routerLink="">Services</a>
-      <a routerLink="">Clients</a>
-      <a routerLink="">Contact</a>
+      <a routerLink="/services">Services</a>
+      <a routerLink="/client">Clients</a>
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="">Home</a>
     </div>
     <div>
       <router-outlet></router-outlet>
