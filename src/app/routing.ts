@@ -15,7 +15,12 @@ export const appRoutes: Routes = [
     data: { title: "About Kaminsky" }
   },
   {
+    path: 'hybrid',
+    loadChildren: './hybrid-app/hybrid-app.module#HybridAppModule'
+  },
+  {
     path: "**",
     component: PageNotFoundComponent
   }
+
 ];
