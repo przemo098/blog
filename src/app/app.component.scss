@@ -1,3 +1,5 @@
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
 $navBarColor: #24292e;
 
 .navbar-custom {
@@ -27,6 +29,8 @@ $navBarColor: #24292e;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
+  float:left;
+
 }
 
 .sidenav a {
@@ -36,4 +40,9 @@ $navBarColor: #24292e;
   color: #818181;
   display: block;
   transition: 0.3s;
+}
+
+.my-container{
+  @extend .container-fluid;
+  padding: 0px;
 }
