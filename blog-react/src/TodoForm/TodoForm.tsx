@@ -1,17 +1,31 @@
-import React, { Component, ChangeEvent } from "react";
-import { ITodoItem } from "./App";
+import React, { Component } from "react";
+import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
 
 interface ITodoFormProps {
   inputElement: any;
   addItem: (e: React.FormEvent) => void;
   handleInput: (e: React.ChangeEvent) => void;
-  currentItem: ITodoItem;  
+  currentItem: ITodoItem;
 }
 
 class TodoForm extends Component<ITodoFormProps, any> {
+  eventBus: ServiceBus;
+  /**
+   *
+   */
+  constructor(props: any) {
+    super(props);
+    this.eventBus = new ServiceBus();
+    this.eventBus.subcribeTo(TodoEventEnum.AddItem, () => console.log("dupa"));
+  }
+
+
+
+
   componentDidUpdate() {
     this.props.inputElement.current.focus();
   }
+
   render() {
     return (
       <div className="todoList">
@@ -19,15 +33,15 @@ class TodoForm extends Component<ITodoFormProps, any> {
           <form onSubmit={this.props.addItem}>
             <div className="input-group input-group-sm mb-3">
               <div className="input-group-prepend">
-              <input
-                className="form-control"
-                placeholder="Task"
-                ref={this.props.inputElement}
-                value={this.props.currentItem.text}
-                onChange={this.props.handleInput}
-              />
-              </div>              
-             
+                <input
+                  className="form-control"
+                  placeholder="Task"
+                  ref={this.props.inputElement}
+                  value={this.props.currentItem.text}
+                  onChange={this.props.handleInput}
+                />
+              </div>
+
               <button type="submit" className="btn btn-primary">
                 {" "}
                 Add Task{" "}

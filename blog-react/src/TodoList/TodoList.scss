@@ -19,4 +19,7 @@
 	filter: invert(.5) sepia(1) saturate(50) hue-rotate(175deg);
 }
 
-.item {display:list-item;}
+.todo-text {
+    overflow: hidden;
+    word-wrap: break-word;
+}

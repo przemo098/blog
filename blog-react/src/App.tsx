@@ -1,13 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 import { Component } from "react";
 import "./App.scss";
-import TodoForm from './TodoForm';
-import TodoList from './TodoList';
-
-export interface ITodoItem {
-  key: number;
-  text: string;
-}
+import TodoForm from "./TodoForm/TodoForm";
+import TodoList from "./TodoList/TodoList";
+import { ITodoItem } from "../../shared/todoServiceBus";
 
 interface IAppState {
   items: Array<ITodoItem>;
@@ -51,21 +47,23 @@ class App extends Component<any, IAppState> {
   };
   render() {
     return (
-      <div className="d-flex">
+      <div>
         <img src={require("./logo.svg")} className="logo" />
-        <div className="d-flex justify-content-center list-margin">
-          <div className="d-flex flex-column">
-            <div>
-              <TodoForm
-                addItem={this.addItem}
-                inputElement={this.inputElement}
-                handleInput={this.handleInput}
-                currentItem={this.state.currentItem}
-              />
-              <TodoList
-                entries={this.state.items}
-                deleteItem={this.deleteItem}
-              />
+        <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center todos">
+            <div className="d-flex flex-column todo-list">
+              <div>
+                <TodoForm
+                  addItem={this.addItem}
+                  inputElement={this.inputElement}
+                  handleInput={this.handleInput}
+                  currentItem={this.state.currentItem}
+                />
+                <TodoList
+                  entries={this.state.items}
+                  deleteItem={this.deleteItem}
+                />
+              </div>
             </div>
           </div>
         </div>
