@@ -7,13 +7,16 @@ import ServiceBus, {ITodoItem, TodoEventEnum} from '../../../../../shared/todoSe
   styleUrls: ['./angular-todo.component.scss']
 })
 export class AngularTodoComponent implements OnInit {
+  items: Array<ITodoItem>
+  serviceBus: ServiceBus;
 
   constructor() {
     this.serviceBus = new ServiceBus();
    }
 
-  items: Array<ITodoItem>
-  serviceBus: ServiceBus;
+addItem(e){
+console.log(e);
+}
 
   ngOnInit() {
     this.serviceBus.subcribeTo(TodoEventEnum.AddItem, () => console.log("jedziemy z koxem"))
