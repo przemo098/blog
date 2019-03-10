@@ -1,40 +1,37 @@
-// export default class ServiceBus {
-//   private readonly serviceBusDomId = "serviceBus";
-//   private serviceBusDomElement: HTMLElement = new HTMLElement();
-//   private TodoEvents = new Array<Event>();
+export default class ServiceBus {
+  private readonly serviceBusDomId = "serviceBus";
+  private serviceBusDomElement: HTMLElement;
 
-//   constructor() {
-//     if (!document.getElementById(this.serviceBusDomId)) {
-//       this.serviceBusDomElement = document.createElement(this.serviceBusDomId);
-//       this.serviceBusDomElement.setAttribute("id", this.serviceBusDomId);
-//     }
-//     this.createEvents();
-//   }
+  constructor() {
+    this.serviceBusDomElement = document.getElementById(
+      this.serviceBusDomId
+    ) as HTMLElement;
+    if (!this.serviceBusDomElement) {
+      let htmlElement = document.createElement(this.serviceBusDomId);
+      htmlElement.setAttribute("id", this.serviceBusDomId);
+      this.serviceBusDomElement = document.body.appendChild(htmlElement);
+    }
+  }
 
-//   subcribeTo(event: TodoEventEnum, action: (event: Event) => void) {
-//     this.serviceBusDomElement.addEventListener(TodoEventEnum[event], action);
-//   }
+  subcribeTo(event: TodoEventEnum, action: (event: CustomEvent) => void) {
+    this.serviceBusDomElement.addEventListener(TodoEventEnum[event], action as EventListener);
+  }
 
-//   dispatchEvent(eventType: string, data: ITodoItem){
-//     let event = new CustomEvent(eventType, {detail: data, bubbles: false});
-//     this.serviceBusDomElement.dispatchEvent(event);
-//   }
+  dispatchEvent(eventType: TodoEventEnum, data: ITodoItem) {
+    let event = new CustomEvent(TodoEventEnum[eventType], {
+      detail: data,
+      bubbles: false
+    });
+    this.serviceBusDomElement.dispatchEvent(event);
+  }
+}
 
-//   private createEvents(): any {
-//     for (const event in TodoEventEnum) {
-//       if (isNaN(Number(event))) {
-//         this.TodoEvents.push(new Event(event));
-//       }
-//     }
-//   }
-// }
+export enum TodoEventEnum {
+  AddItem,
+  DeleteItem
+}
 
-// export enum TodoEventEnum {
-//   AddItem,
-//   DeleteItem
-// }
-
-// export interface ITodoItem {
-//   key: number;
-//   text: string;
-// }
+export interface ITodoItem {
+  key: number;
+  text: string;
+}
