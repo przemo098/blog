@@ -1,0 +1,23 @@
+<header>
+  <nav class="navbar navbar-custom">
+    <img
+      class="navbar-custom__menuButton"
+      (click)="toggleNav()"
+      src="assets/icons/menu-button.svg"
+    />
+
+    <a class="navbar-brand" href="#">P.Kaminsky</a>
+  </nav>
+</header>
+
+<div class="d-flex">
+  <div id="mySidenav" class="sidenav" [ngStyle]="{ width: navWidth }">
+    <a routerLink="/about">About</a>
+    <a routerLink="/services">Services</a>
+    <a routerLink="/client">Clients</a>
+    <a routerLink="/contact">Contact</a>
+    <a routerLink="/hybrid">HybridApp</a>
+    <a routerLink="">Home</a>
+  </div>
+  <router-outlet></router-outlet>
+</div>
