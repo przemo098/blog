@@ -1,0 +1,22 @@
+.svg {
+    width: 35px;
+    height: 35px;
+    margin-left: 20px; 
+}
+
+.bullet {
+    width: 15px;
+    height: 15px;
+}
+
+/* img:hover {
+    background-color: #111;
+
+} */
+
+.svg:hover {
+	cursor: pointer;
+	filter: invert(.5) sepia(1) saturate(50) hue-rotate(175deg);
+}
+
+.item {display:list-item;}
