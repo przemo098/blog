@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
+import ServiceBus, { ITodoItem, TodoEventEnum } from "../serviceBus";
 
 interface ITodoFormProps {
   inputElement: any;
@@ -15,12 +15,8 @@ class TodoForm extends Component<ITodoFormProps, any> {
    */
   constructor(props: any) {
     super(props);
-    this.eventBus = new ServiceBus();
-    this.eventBus.subcribeTo(TodoEventEnum.AddItem, () => console.log("dupa"));
+    this.eventBus = new ServiceBus();    
   }
-
-
-
 
   componentDidUpdate() {
     this.props.inputElement.current.focus();
@@ -30,7 +26,15 @@ class TodoForm extends Component<ITodoFormProps, any> {
     return (
       <div className="todoList">
         <div className="header">
-          <form onSubmit={this.props.addItem}>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              this.eventBus.dispatchEvent(
+                TodoEventEnum.AddItem,
+                this.props.currentItem
+              );
+            }}
+          >
             <div className="input-group input-group-sm mb-3">
               <div className="input-group-prepend">
                 <input

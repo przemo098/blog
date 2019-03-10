@@ -3,7 +3,7 @@ import { Component } from "react";
 import "./App.scss";
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
-import { ITodoItem } from "../../shared/todoServiceBus";
+import ServiceBus from "./serviceBus";
 
 interface IAppState {
   items: Array<ITodoItem>;
@@ -11,12 +11,16 @@ interface IAppState {
 }
 
 class App extends Component<any, IAppState> {
+  serviceBus: ServiceBus;
   constructor(props: any) {
     super(props);
     this.state = {
       items: [],
       currentItem: { text: "", key: Date.now() }
     };
+    this.serviceBus = new ServiceBus();
+    this.serviceBus.subcribeTo(TodoEventEnum.AddItem, () => this.addItem());
+    this.serviceBus.subcribeTo(TodoEventEnum.DeleteItem, (item: CustomEvent<ITodoItem>) => this.deleteItem(item.detail));
   }
   inputElement: any = React.createRef();
   handleInput = (e: any) => {
@@ -26,8 +30,8 @@ class App extends Component<any, IAppState> {
       currentItem
     });
   };
-  addItem = (e: React.FormEvent<Element>): void => {
-    e.preventDefault();
+
+  addItem = (): void => {
     const newItem = this.state.currentItem;
     if (newItem.text !== "") {
       const items = [...this.state.items, newItem];
@@ -37,14 +41,16 @@ class App extends Component<any, IAppState> {
       });
     }
   };
-  deleteItem = (key: number) => {
+
+  deleteItem = (item: ITodoItem) => {
     const filteredItems = this.state.items.filter(item => {
-      return item.key !== key;
+      return item.key !== item.key;
     });
     this.setState({
       items: filteredItems
     });
   };
+
   render() {
     return (
       <div>
@@ -73,3 +79,14 @@ class App extends Component<any, IAppState> {
 }
 
 export default App;
+
+
+export enum TodoEventEnum {
+  AddItem,
+  DeleteItem
+}
+
+export interface ITodoItem {
+  key: number;
+  text: string;
+}
