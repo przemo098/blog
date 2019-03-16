@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Component } from "react";
-import "./App.scss";
+// import "./App.scss";
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
-import ServiceBus from "./serviceBus";
+import ServiceBus from '../../shared/todoServiceBus';
 
 interface IAppState {
   items: Array<ITodoItem>;
@@ -12,8 +12,9 @@ interface IAppState {
 
 class App extends Component<any, IAppState> {
   serviceBus: ServiceBus;
-  constructor(props: any) {
+  constructor(props: any) {    
     super(props);
+
     this.state = {
       items: [],
       currentItem: { text: "", key: Date.now() }
@@ -31,7 +32,7 @@ class App extends Component<any, IAppState> {
     });
   };
 
-  addItem = (): void => {
+  addItem(): void {
     const newItem = this.state.currentItem;
     if (newItem.text !== "") {
       const items = [...this.state.items, newItem];
@@ -42,9 +43,10 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  deleteItem = (item: ITodoItem) => {
-    const filteredItems = this.state.items.filter(item => {
-      return item.key !== item.key;
+  deleteItem(item: ITodoItem) {
+    console.log(item);
+    const filteredItems = this.state.items.filter(x => {
+      return x.key !== item.key;
     });
     this.setState({
       items: filteredItems
@@ -52,27 +54,10 @@ class App extends Component<any, IAppState> {
   };
 
   render() {
+    console.log("trololo");
     return (
       <div>
-        <img src={require("./logo.svg")} className="logo" />
-        <div className="d-flex justify-content-center">
-          <div className="d-flex justify-content-center todos">
-            <div className="d-flex flex-column todo-list">
-              <div>
-                <TodoForm
-                  addItem={this.addItem}
-                  inputElement={this.inputElement}
-                  handleInput={this.handleInput}
-                  currentItem={this.state.currentItem}
-                />
-                <TodoList
-                  entries={this.state.items}
-                  deleteItem={this.deleteItem}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+dupa
       </div>
     );
   }

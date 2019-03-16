@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import ServiceBus, { ITodoItem, TodoEventEnum } from "../serviceBus";
+import { Component } from "react";
+import * as React from "react";
+import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
 
 interface ITodoFormProps {
   inputElement: any;

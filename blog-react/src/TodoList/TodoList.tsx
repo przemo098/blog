@@ -1,8 +1,9 @@
 import "./TodoList.scss";
-import React, { Component } from "react";
-import { ITodoItem } from "../App";
-import ServiceBus, { TodoEventEnum } from "../serviceBus";
-// import { ITodoItem } from "../../../shared/todoServiceBus";
+import { Component } from "react";
+import * as React from "react";
+import ServiceBus, { ITodoItem } from "../../../shared/todoServiceBus";
+import GunSvg from "./gun.svg";
+import CancelSvg from "./cancel.svg";
 
 interface ITodoListProps {
   entries: any;
@@ -22,18 +23,14 @@ class TodoList extends Component<ITodoListProps, any> {
   createTasks = (item: ITodoItem) => {
     return (
       <div className="d-flex align-items-center" key={item.key}>
-        <div className="">
-          <img src={require("./gun.svg")} className="bullet" />
+        <div className="d-flex">
+          <div className="bullet">
+            <GunSvg />
+          </div>
+          <div className="todo-text">{item.text}</div>
         </div>
-        <div className="todo-text">{item.text}</div>
-        <div className="ml-auto">
-          <img
-            src={require("./cancel.svg")}
-            className="svg"
-            onClick={() =>
-              this.eventBus.dispatchEvent(TodoEventEnum.DeleteItem, item)
-            }
-          />
+        <div className="ml-auto svg" onClick={() => this.props.deleteItem(item)}>
+          <CancelSvg />
         </div>
       </div>
     );
