@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Component } from "react";
-// import "./App.scss";
+import "./App.scss";
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
-import ServiceBus from '../../shared/todoServiceBus';
+import ServiceBus from "../../shared/todoServiceBus";
+import LogoSvg from "./logo.svg";
 
 interface IAppState {
   items: Array<ITodoItem>;
@@ -12,7 +13,7 @@ interface IAppState {
 
 class App extends Component<any, IAppState> {
   serviceBus: ServiceBus;
-  constructor(props: any) {    
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -21,7 +22,10 @@ class App extends Component<any, IAppState> {
     };
     this.serviceBus = new ServiceBus();
     this.serviceBus.subcribeTo(TodoEventEnum.AddItem, () => this.addItem());
-    this.serviceBus.subcribeTo(TodoEventEnum.DeleteItem, (item: CustomEvent<ITodoItem>) => this.deleteItem(item.detail));
+    this.serviceBus.subcribeTo(
+      TodoEventEnum.DeleteItem,
+      (item: CustomEvent<ITodoItem>) => this.deleteItem(item.detail)
+    );
   }
   inputElement: any = React.createRef();
   handleInput = (e: any) => {
@@ -41,30 +45,45 @@ class App extends Component<any, IAppState> {
         currentItem: { text: "", key: Date.now() }
       });
     }
-  };
+  }
 
   deleteItem(item: ITodoItem) {
-    console.log(item);
     const filteredItems = this.state.items.filter(x => {
       return x.key !== item.key;
     });
     this.setState({
       items: filteredItems
     });
-  };
+  }
 
   render() {
-    console.log("trololo");
     return (
       <div>
-dupa
+        <div className="logo">
+          <LogoSvg />
+        </div>
+        <div className="d-flex justify-content-center list-margin todos">
+          <div className="d-flex flex-column">
+            <div>
+              <TodoForm
+                addItem={this.addItem}
+                inputElement={this.inputElement}
+                handleInput={this.handleInput}
+                currentItem={this.state.currentItem}
+              />
+              <TodoList
+                entries={this.state.items}
+                deleteItem={(item: ITodoItem) =>this.deleteItem(item)}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default App;
-
 
 export enum TodoEventEnum {
   AddItem,
