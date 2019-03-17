@@ -1,25 +1,38 @@
 import { Component } from "react";
 import * as React from "react";
 import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
+import { ITodoStore } from "../../../shared/todoStore";
+import TodoStore from "../../../shared/todoStore";
+import TodoServiceBus from "../../../shared/todoServiceBus";
 
-interface ITodoFormProps {
-  inputElement: any;
-  handleInput: (e: React.ChangeEvent) => void;
+interface ITodoFormState{
   currentItem: ITodoItem;
 }
 
-class TodoForm extends Component<ITodoFormProps, any> {
-  todoEventBus: ServiceBus;
+class TodoForm extends Component<any, ITodoFormState> {
+  todoStore: ITodoStore;
   /**
    *
    */
   constructor(props: any) {
     super(props);
-    this.todoEventBus = new ServiceBus();    
+    this.state = {
+      currentItem: { text: "", key: Date.now() }
+    };
+    this.todoStore = TodoStore;
   }
+  inputElement: any = React.createRef();
 
   componentDidUpdate() {
-    this.props.inputElement.current.focus();
+    this.inputElement.current.focus();
+  }
+
+  handleUpdate(e: any){
+    const itemText = e.target.value;
+    TodoStore.updateNewItemText(itemText);
+    this.setState({
+      currentItem: TodoStore.newItem
+    });
   }
 
   render() {
@@ -29,10 +42,10 @@ class TodoForm extends Component<ITodoFormProps, any> {
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.todoEventBus.dispatchEvent(
-                TodoEventEnum.AddItem,
-                this.props.currentItem
-              );
+              TodoStore.add();
+              this.setState({
+                currentItem: TodoStore.newItem
+              })
             }}
           >
             <div className="input-group input-group-sm mb-3">
@@ -40,9 +53,9 @@ class TodoForm extends Component<ITodoFormProps, any> {
                 <input
                   className="form-control"
                   placeholder="Task"
-                  ref={this.props.inputElement}
-                  value={this.props.currentItem.text}
-                  onChange={this.props.handleInput}
+                  ref = {this.inputElement}
+                  value={(this.state.currentItem.text)}
+                  onChange={(e) => this.handleUpdate(e)}
                 />
               </div>
 

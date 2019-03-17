@@ -1,8 +1,13 @@
-export default class ServiceBus {
+
+import  TodoStore, { ITodoStore}  from './todoStore';
+
+export class ServiceBus {
   private readonly serviceBusDomId = "serviceBus";
   private serviceBusDomElement: HTMLElement;
+  public store: ITodoStore;
 
   constructor() {
+    this.store = TodoStore;
     this.serviceBusDomElement = document.getElementById(
       this.serviceBusDomId
     ) as HTMLElement;
@@ -26,9 +31,15 @@ export default class ServiceBus {
   }
 }
 
+const instance = new ServiceBus();
+Object.freeze(instance);
+
+export default instance;
+
 export enum TodoEventEnum {
-  AddItem,
-  DeleteItem
+  ItemAdded,
+  DeleteItem,
+  TodoListChange
 }
 
 export interface ITodoItem {
