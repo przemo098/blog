@@ -66,15 +66,11 @@ class App extends Component<any, IAppState> {
           <div className="d-flex flex-column">
             <div>
               <TodoForm
-                addItem={this.addItem}
                 inputElement={this.inputElement}
                 handleInput={this.handleInput}
                 currentItem={this.state.currentItem}
               />
-              <TodoList
-                entries={this.state.items}
-                deleteItem={(item: ITodoItem) =>this.deleteItem(item)}
-              />
+              <TodoList entries={this.state.items} />
             </div>
           </div>
         </div>

@@ -4,19 +4,18 @@ import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServic
 
 interface ITodoFormProps {
   inputElement: any;
-  addItem: (e: React.FormEvent) => void;
   handleInput: (e: React.ChangeEvent) => void;
   currentItem: ITodoItem;
 }
 
 class TodoForm extends Component<ITodoFormProps, any> {
-  eventBus: ServiceBus;
+  todoEventBus: ServiceBus;
   /**
    *
    */
   constructor(props: any) {
     super(props);
-    this.eventBus = new ServiceBus();    
+    this.todoEventBus = new ServiceBus();    
   }
 
   componentDidUpdate() {
@@ -30,7 +29,7 @@ class TodoForm extends Component<ITodoFormProps, any> {
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.eventBus.dispatchEvent(
+              this.todoEventBus.dispatchEvent(
                 TodoEventEnum.AddItem,
                 this.props.currentItem
               );
