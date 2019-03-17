@@ -4,6 +4,7 @@
 /blog/dist
 /blog/tmp
 /blog/out-tsc
+/blog-react/dist
 
 # dependencies
 /blog/node_modules
