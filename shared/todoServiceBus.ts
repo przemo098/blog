@@ -31,18 +31,25 @@ export class ServiceBus {
   }
 }
 
-const instance = new ServiceBus();
-Object.freeze(instance);
-
-export default instance;
-
 export enum TodoEventEnum {
   ItemAdded,
   DeleteItem,
-  TodoListChange
+  TodoListChange,
+  InputTextChange
 }
 
 export interface ITodoItem {
   key: number;
   text: string;
 }
+
+
+
+if(!(window as any).serviceBus){
+  (window as any).serviceBus = new ServiceBus();
+}
+
+const instance: ServiceBus = (window as any).serviceBus;
+Object.freeze(instance);
+
+export default instance;

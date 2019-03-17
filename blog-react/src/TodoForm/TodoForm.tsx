@@ -1,9 +1,8 @@
 import { Component } from "react";
 import * as React from "react";
-import ServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
+import TodoServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
 import { ITodoStore } from "../../../shared/todoStore";
 import TodoStore from "../../../shared/todoStore";
-import TodoServiceBus from "../../../shared/todoServiceBus";
 
 interface ITodoFormState{
   currentItem: ITodoItem;
@@ -20,6 +19,11 @@ class TodoForm extends Component<any, ITodoFormState> {
       currentItem: { text: "", key: Date.now() }
     };
     this.todoStore = TodoStore;
+    TodoServiceBus.subcribeTo(TodoEventEnum.InputTextChange, () =>
+    this.setState({
+      currentItem: TodoStore.newItem
+    })
+  );
   }
   inputElement: any = React.createRef();
 

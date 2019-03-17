@@ -1,26 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import ServiceBus, {ITodoItem, TodoEventEnum} from '../../../../../shared/todoServiceBus'
+import { Component, OnInit } from "@angular/core";
+import ServiceBus, {
+  ITodoItem,
+  TodoEventEnum
+} from "../../../../../shared/todoServiceBus";
+import TodoStore from "../../../../../shared/todoStore";
 
 @Component({
-  selector: 'app-angular-todo',
-  templateUrl: './angular-todo.component.html',
-  styleUrls: ['./angular-todo.component.scss']
+  selector: "app-angular-todo",
+  templateUrl: "./angular-todo.component.html",
+  styleUrls: ["./angular-todo.component.scss"]
 })
 export class AngularTodoComponent implements OnInit {
-  items: Array<ITodoItem>
-  serviceBus: ServiceBus;
+  items: Array<ITodoItem>;
+  newItem: ITodoItem;
 
   constructor() {
-    this.serviceBus = new ServiceBus();
-   }
-
-addItem(e){
-console.log(e);
-}
-
-  ngOnInit() {
-    this.serviceBus.subcribeTo(TodoEventEnum.AddItem, () => console.log("jedziemy z koxem"))
-    this.serviceBus.dispatchEvent(TodoEventEnum.AddItem, {key: 1, text: "asdasd"});
+      this.items = TodoStore.items;
+      this.newItem = TodoStore.newItem;
+      ServiceBus.subcribeTo(TodoEventEnum.InputTextChange, () => this.newItem = TodoStore.newItem)
+      ServiceBus.subcribeTo(TodoEventEnum.TodoListChange, () => this.items = TodoStore.items)
   }
 
+  addItem(){
+    TodoStore.add();
+  }
+
+  removeItem(item: ITodoItem){
+    TodoStore.delete(item);
+  }
+
+  ngOnInit() {
+  }
 }

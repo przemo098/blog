@@ -1,16 +1,37 @@
-
 <img src="assets/icons/angular_logo.svg" class="logo" />
 
-<div class="todoList">
-  <div class="header">
-    <form onSubmit="addItem">
+<div class="todos">
+  <div class="header d-flex justify-content-center">
+    <form class="d-flex-column">
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
-          <input/>
+          <input [(ngModel)]="newItem.text" name="text" />
         </div>
-
-        <button type="submit" class="btn btn-primary">Add task</button>
+        <button type="button" (click)="addItem()" class="btn btn-primary">
+          Add task
+        </button>
       </div>
+
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let item of items"
+        >
+          <div class="align-self-center">
+            {{ item.text }}
+          </div>
+          <button class="btn btn-danger ml-auto" (click)="removeItem(item)">
+            x
+          </button>
+        </li>
+      </ul>
+
+      <!-- <div class="d-flex" *ngFor="let item of items">
+        <div class="align-self-center">
+          {{ item.text }}
+        </div>
+        <button class="btn btn-danger ml-auto" (click)="removeItem(item)">x</button>
+      </div> -->
     </form>
   </div>
 </div>

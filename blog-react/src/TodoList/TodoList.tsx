@@ -41,14 +41,14 @@ class TodoList extends Component<any, ITodoListState> {
           <div className="todo-text">{item.text}</div>
         </div>
         <div className="ml-auto svg" onClick={e => TodoStore.delete(item)}>
-          <GunSvg />
+          <CancelSvg />
         </div>
       </div>
     );
   };
+  
   render() {
     const listItems = this.state.entries.map(this.createTasks);
-
     return <div>{listItems}</div>;
   }
 }

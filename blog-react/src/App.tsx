@@ -30,13 +30,3 @@ class App extends Component<any, any> {
 }
 
 export default App;
-
-export enum TodoEventEnum {
-  AddItem,
-  DeleteItem
-}
-
-export interface ITodoItem {
-  key: number;
-  text: string;
-}

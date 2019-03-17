@@ -5,11 +5,13 @@ import { HybridAppRoutingModule } from './hybrid-app-routing.module';
 import { HybridAppComponent } from './hybrid-app/hybrid-app.component';
 import { ReactComponent } from './react/react.component';
 import { AngularTodoComponent } from './angular-todo/angular-todo.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    HybridAppRoutingModule
+    HybridAppRoutingModule,
+    FormsModule
   ],
   declarations: [HybridAppComponent, ReactComponent, AngularTodoComponent]
 })

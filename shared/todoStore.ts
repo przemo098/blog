@@ -33,10 +33,16 @@ class TodoStore implements ITodoStore {
 
   updateNewItemText = (value: string) => {
     this.newItem.text = value;
+    TodoServiceBus.dispatchEvent(TodoEventEnum.InputTextChange, null)
   };
 }
 
-const instance: ITodoStore = new TodoStore();
+
+if(!(window as any).todoStore){
+  (window as any).todoStore = new TodoStore();
+}
+
+const instance: ITodoStore = (window as any).todoStore;
 Object.freeze(instance);
 
 export default instance;
