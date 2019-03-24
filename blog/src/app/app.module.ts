@@ -25,7 +25,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
     // PrimeNG
     AboutModule,
-    // BrowserModule,
+    BrowserModule,
     // ButtonModule,
     // MenuModule,
     // MenubarModule,

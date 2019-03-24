@@ -25,10 +25,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "src/assets/react", "output": "/"}
+              { "glob": "**/*", "input": "src/assets/react", "output": "/"},
+              { "glob": "**/*", "input": "../shared/assets", "output": "/assets" }
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss"
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "src/styles.scss"
             ],
             "scripts": ["node_modules/particles.js/particles.js"]
           },

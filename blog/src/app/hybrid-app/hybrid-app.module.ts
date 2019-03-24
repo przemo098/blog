@@ -6,12 +6,18 @@ import { HybridAppComponent } from './hybrid-app/hybrid-app.component';
 import { ReactComponent } from './react/react.component';
 import { AngularTodoComponent } from './angular-todo/angular-todo.component';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule, MatButtonModule, MatListModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     HybridAppRoutingModule,
-    FormsModule
+    FormsModule,
+
+    // material
+    MatInputModule,
+    MatButtonModule,
+    MatListModule
   ],
   declarations: [HybridAppComponent, ReactComponent, AngularTodoComponent]
 })

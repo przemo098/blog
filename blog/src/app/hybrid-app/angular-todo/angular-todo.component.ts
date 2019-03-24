@@ -21,12 +21,16 @@ export class AngularTodoComponent implements OnInit {
       ServiceBus.subcribeTo(TodoEventEnum.TodoListChange, () => this.items = TodoStore.items)
   }
 
+  onKeyDown(){
+    TodoStore.updateNewItemText(this.newItem.text)
+  }
+
   addItem(){
     TodoStore.add();
   }
 
-  removeItem(item: ITodoItem){
-    TodoStore.delete(item);
+  removeItem(){
+    TodoStore.delete(this.newItem);
   }
 
   ngOnInit() {

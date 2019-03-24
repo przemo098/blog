@@ -1,37 +1,36 @@
 <img src="assets/icons/angular_logo.svg" class="logo" />
 
-<div class="todos">
-  <div class="header d-flex justify-content-center">
+<div>
+  <div class="d-flex justify-content-center todos">
     <form class="d-flex-column">
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <input [(ngModel)]="newItem.text" name="text" />
+      <div class="d-flex">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Task"
+            name="task"
+            [(ngModel)]="newItem.text"
+            (ngModelChange)="onKeyDown()"
+          />
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" (click)="addItem()">
+            Add task
+          </button>
         </div>
-        <button type="button" (click)="addItem()" class="btn btn-primary">
-          Add task
-        </button>
       </div>
 
-      <ul class="list-group">
-        <li
-          class="list-group-item d-flex justify-content-between align-items-center"
-          *ngFor="let item of items"
-        >
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of items">
           <div class="align-self-center">
             {{ item.text }}
           </div>
-          <button class="btn btn-danger ml-auto" (click)="removeItem(item)">
-            x
-          </button>
-        </li>
-      </ul>
 
-      <!-- <div class="d-flex" *ngFor="let item of items">
-        <div class="align-self-center">
-          {{ item.text }}
-        </div>
-        <button class="btn btn-danger ml-auto" (click)="removeItem(item)">x</button>
-      </div> -->
+          <img src="./assets/cancel.svg" 
+            class="ml-auto cancel-svg"
+            (click)="removeItem()" />
+        </mat-list-item>
+      </mat-nav-list>
     </form>
   </div>
 </div>

@@ -7,3 +7,13 @@
 .todos{
     margin-top: 20.5px;
 }
+
+.cancel-svg{
+    width: 35px;
+    height: 35px;
+}
+
+.cancel-svg:hover{
+    cursor: pointer;
+	filter: invert(.5) sepia(1) saturate(50) hue-rotate(175deg);
+}

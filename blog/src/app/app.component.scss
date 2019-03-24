@@ -1,4 +1,5 @@
-@import 'node_modules/bootstrap/scss/bootstrap.scss';
+// @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $navBarColor: #24292e;
 
@@ -40,7 +41,7 @@ $navBarColor: #24292e;
   transition: 0.3s;
 }
 
-.my-container{
-  @extend .container-fluid;
-  padding: 0px;
-}
+// .my-container{
+//   @extend .container-fluid;
+//   padding: 0px;
+// }
