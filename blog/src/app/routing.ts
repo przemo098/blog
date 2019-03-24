@@ -6,7 +6,7 @@ import { CvComponent } from "./cv/cv.component";
 
 export const appRoutes: Routes = [
   {
-    path: "about",
+    path: "cat",
     component: AboutComponent,
     data: { title: "About Kaminsky" }
   },

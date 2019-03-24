@@ -1,15 +1,29 @@
 :host {
-    width: 100%;
-    background-color: red
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.content{
-    height: 100%;
+.content {
+  height: 100%;
 }
 
-svg{
-    width: 100px;
-    height: 100px;
+.wheel {
+  width: 75px;
+  height: 75px;
+}
+
+.bottom{
+    margin-top: auto;
+}
+
+.wheel-column {
     margin: 20px;
-    display:inline-block;
+    display: flex;
+    flex-direction: column;
+}
+
+h1::first-letter { 
+    font-size: 200%;
+    color: #8A2BE2;
   }
