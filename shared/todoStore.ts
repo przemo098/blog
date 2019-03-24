@@ -19,6 +19,8 @@ class TodoStore implements ITodoStore {
   }
 
   add() {
+    if(!this.newItem.text)
+      return;
     this.newItem.key = Date.now();
     this.items.push({...this.newItem});
     this.newItem.text ="";  

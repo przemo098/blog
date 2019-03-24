@@ -28,7 +28,6 @@ class TodoForm extends Component<any, ITodoFormState> {
   inputElement: any = React.createRef();
 
   componentDidUpdate() {
-    this.inputElement.current.focus();
   }
 
   handleUpdate(e: any){

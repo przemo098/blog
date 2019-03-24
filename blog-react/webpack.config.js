@@ -3,7 +3,7 @@ const path = require("path"),
   HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  context: path.resolve(__dirname, "src"),
   entry: {
     app: ["./index.tsx"]
   },
@@ -30,8 +30,15 @@ module.exports = {
         ]
       },
       {
-        test: /\.svg$/,
-        loader: "svg-react-loader"
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
@@ -41,5 +48,5 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
-  devtool:'source-map'
+  devtool: "source-map"
 };
