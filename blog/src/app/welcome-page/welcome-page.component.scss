@@ -1,29 +1,36 @@
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
 :host {
+  margin: 20px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-}
-
-.content {
-  height: 100%;
+  position: relative;
+  justify-content: center
 }
 
 .wheel {
   width: 75px;
   height: 75px;
-}
-
-.bottom{
-    margin-top: auto;
-}
-
-.wheel-column {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
+  position: absolute;
 }
 
 h1::first-letter { 
     font-size: 200%;
     color: #8A2BE2;
   }
+
+.left{
+    left: 0px;
+}
+
+.right{
+    right: 0px;
+}
+
+.bottom{
+    bottom: 0px;
+}
+
+.top{
+    top: 0px;
+}

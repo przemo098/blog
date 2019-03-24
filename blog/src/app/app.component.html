@@ -11,7 +11,7 @@
 </header>
 
 <div class="d-flex">
-  <div id="mySidenav" class="sidenav" [ngStyle]="{ width: navWidth }">
+  <div id="mySidenav" class="sidenav" [ngStyle]="{ 'minWidth': navMinWidth, 'width': navWidth }">
     <a routerLink="/cat">Cat</a>
     <a routerLink="/404">404</a>
     <a routerLink="/hybrid">HybridApp</a>

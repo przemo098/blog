@@ -8,7 +8,11 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "app";
   isNavMenu: boolean = true;
-  navWidth = "250px";
+  navMinWidth: string;
+  navWidth: string;
+
+  normalWidth = "200px";
+  noWidth = "0px";
 
   public isSideMenu: boolean = true;
 
@@ -16,15 +20,19 @@ export class AppComponent {
    *
    */
   constructor() {
+    this.navMinWidth = this.normalWidth;
+    this.navWidth = this.normalWidth;
   }
 
   toggleNav() {
     this.isNavMenu = !this.isNavMenu;
 
     if (this.isNavMenu) {
-      this.navWidth = "250px";
+      this.navMinWidth = this.normalWidth;
+      this.navWidth = this.normalWidth;
     } else {
-      this.navWidth = "0px";
+      this.navMinWidth = this.noWidth;
+      this.navWidth = this.noWidth;
     }
   }
 
