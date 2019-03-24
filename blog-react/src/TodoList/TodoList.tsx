@@ -33,7 +33,7 @@ class TodoList extends Component<any, ITodoListState> {
 
   createTasks = (item: ITodoItem) => {
     return (
-      <div className="d-flex align-items-center" key={item.key}>
+      <div className="d-flex align-items-center item" key={item.key}>
         <div className="d-flex">
           <div className="bullet">
             <img src={GunSvg as any} />
