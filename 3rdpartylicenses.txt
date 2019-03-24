@@ -273,6 +273,10 @@ Apache License
  See the License for the specific language governing permissions and
  limitations under the License.
 
+@angular/platform-browser@6.1.10
+MIT
+MIT
+
 tslib@1.9.3
 Apache-2.0
 Apache License
@@ -335,7 +339,7 @@ END OF TERMS AND CONDITIONS
 MIT
 MIT
 
-@angular/platform-browser@6.1.10
+@angular/core@6.1.10
 MIT
 MIT
 
@@ -343,7 +347,7 @@ MIT
 MIT
 MIT
 
-@angular/core@6.1.10
+@angular/animations@7.2.9
 MIT
 MIT
 
