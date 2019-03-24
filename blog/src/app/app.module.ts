@@ -11,12 +11,14 @@ import { ParticlesModule } from 'angular-particle';
 import { AboutModule } from './about/about.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { CvComponent } from './cv/cv.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    CvComponent
   ],
   imports: [
     ParticlesModule,
