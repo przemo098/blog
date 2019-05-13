@@ -7,21 +7,37 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "app";
-  isNavMenu: boolean = true;
+  isNavMenu: boolean = false;
   navMinWidth: string;
   navWidth: string;
 
   normalWidth = "200px";
   noWidth = "0px";
-
-  public isSideMenu: boolean = true;
-
   /**
    *
    */
   constructor() {
-    this.navMinWidth = this.normalWidth;
+    if(window.innerWidth < 600){
+      this.navMinWidth = this.noWidth;
+      this.isNavMenu = true;
+    }else{
+      this.navMinWidth = this.normalWidth;
+    }
+
     this.navWidth = this.normalWidth;
+    this.setSideMenu();
+
+    window.onresize= () => {
+      this.setSideMenu();
+    };
+  }
+
+  setSideMenu(){
+    if(window.innerWidth < 600 && this.isNavMenu){
+      this.toggleNav();
+    }else if(!this.isNavMenu && window.innerWidth > 600){
+      this.toggleNav();
+    }
   }
 
   toggleNav() {
