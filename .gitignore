@@ -5,13 +5,17 @@
 /blog/tmp
 /blog/out-tsc
 /blog-react/dist
+obj/
+bin/
 
 # dependencies
+node_modules/
 /blog/node_modules
 /blog-react/node_modules
 
 # IDEs and editors
 /.idea
+.idea/
 .project
 .classpath
 .c9/
