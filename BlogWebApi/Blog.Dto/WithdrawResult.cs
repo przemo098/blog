@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blog.Dto
+﻿namespace Blog.Dto
 {
   public class WithdrawResult
   {

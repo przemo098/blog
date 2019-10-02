@@ -1,4 +1,5 @@
-using Blog.Dto;
+using System.Collections.Generic;
+using Blog.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWebApi.Controllers
@@ -8,9 +9,9 @@ namespace BlogWebApi.Controllers
     public class AtmController : ControllerBase
     {
         [HttpGet("{amountToWithdraw}")]
-        public WithdrawResult Index(int amountToWithdraw)
+        public Dictionary<int, int> Index(int? amountToWithdraw)
         {
-            return null;
+            return AtmService.Withdraw(amountToWithdraw);
         }
     }
 }

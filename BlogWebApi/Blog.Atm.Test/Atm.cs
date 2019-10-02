@@ -1,5 +1,4 @@
-﻿using System;
-using Blog.Common.Exceptions;
+﻿using Blog.Common.Exceptions;
 using Blog.Services;
 using Xunit;
 
