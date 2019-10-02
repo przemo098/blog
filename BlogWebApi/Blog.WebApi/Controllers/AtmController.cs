@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWebApi.Controllers
 {
-    public class AtmController : Controller
+  [Route("api/[controller]")]
+  [ApiController]
+    public class AtmController : ControllerBase
     {
-        // GET
+        [HttpGet("{amountToWithdraw}")]
         public WithdrawResult Index(int amountToWithdraw)
         {
             return null;
