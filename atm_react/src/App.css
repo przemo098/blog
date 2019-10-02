@@ -25,3 +25,16 @@ body {
 .container {
   display: flex;
 }
+
+.atmSubmit{
+  display: flex;
+  flex-direction: row;
+}
+
+.atmSubmit > .amountToWithdraw{
+  width: 100%
+}
+
+.withdrawResultComponent{
+  height: 300px;
+}
