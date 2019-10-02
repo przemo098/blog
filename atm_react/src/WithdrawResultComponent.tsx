@@ -14,7 +14,7 @@ function WithdrawResultComponent(props: IWithdrawResultComponentProps) {
     return <p>Withdrawn notes with nominal {x}: {props.result[x]}</p>
   });
   
-  return <div className='withdrawResultComponent'>{
+  return <div className='withdrawResult'>{
     result
   }</div>;
 }

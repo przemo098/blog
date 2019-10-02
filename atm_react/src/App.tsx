@@ -7,6 +7,7 @@ import WithdrawResultComponent, { IWithdrawResult } from "./WithdrawResultCompon
 interface AtmState {
   amountToWithdraw: number;
   withdrawResult: IWithdrawResult;
+  isAmountCorrect: boolean;
 }
 
 class App extends React.Component<any, AtmState> {
@@ -16,7 +17,8 @@ class App extends React.Component<any, AtmState> {
     this._atmService = new AtmService();
     this.state = {
       amountToWithdraw: 0,
-      withdrawResult: {}
+      withdrawResult: {},
+      isAmountCorrect: true
     };
   }
 
@@ -24,7 +26,14 @@ class App extends React.Component<any, AtmState> {
     event.preventDefault();
     this._atmService
     .getNotes(this.state.amountToWithdraw)
-    .then(x => this.update(x.json()))
+    .then(x => {
+      if(x.status !==  200){
+        this.setState({isAmountCorrect: false})
+        return;
+      }
+      this.setState({isAmountCorrect: true})
+      this.update(x.json())
+    })
   }
 
   private update(response: Promise<any>){
@@ -33,11 +42,20 @@ class App extends React.Component<any, AtmState> {
 
   private handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     let amount = Number(e.target.value);
+    if(!amount){
+      this.setState({ amountToWithdraw: 0});
+      return;
+    }
     if (amount > 100000) {
       amount = 1000000;
     }
-    this.setState({ amountToWithdraw: amount,
-     });
+    this.setState({ amountToWithdraw: amount});
+  }
+
+  renderWithdrawResult(){
+    if(this.state.isAmountCorrect)
+      return <WithdrawResultComponent result={this.state.withdrawResult} />
+    return <div className='withdrawResult'>Amount to withdraw is incorrect.</div>
   }
 
   render() {
@@ -50,20 +68,16 @@ class App extends React.Component<any, AtmState> {
             <input
               className="amountToWithdraw"
               id="amountToWidthDraw"
-              min="0"
-              max="100000"
               onChange={e => this.handleAmountChange(e)}
-              type="number"
               value={this.state.amountToWithdraw}
             ></input>
             <input type="submit" value="Submit" />
           </div>
         </form> 
-        <WithdrawResultComponent result={this.state.withdrawResult} />
+        {this.renderWithdrawResult()}
       </div>
     );
   }
 }
 
-// dupa={{20: 20, 30: 1}}
 export default App;

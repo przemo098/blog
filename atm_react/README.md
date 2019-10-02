@@ -1,3 +1,10 @@
+To run this application you need to install .net core framework version 2.2 and nodejs.
+Go to BlogWebApi open .sln file with Visual Studio / Rider or any other application compile and run app.
+to run FrontEnd, in current location use console commands:
+### `npm install`
+### `npm start`
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
