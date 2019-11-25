@@ -13,7 +13,6 @@ import { MatInputModule, MatButtonModule, MatListModule } from '@angular/materia
     CommonModule,
     HybridAppRoutingModule,
     FormsModule,
-
     // material
     MatInputModule,
     MatButtonModule,

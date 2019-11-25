@@ -3,20 +3,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './routing/page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
-import { appRoutes } from './routing';
-import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { appRoutes } from './routing/routing';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { ParticlesModule } from 'angular-particle';
-import { AboutModule } from './about/about.module';
+import { AboutModule } from './pages/about/about.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { JourneyComponent } from './pages/journeys/journeys.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    JourneyComponent
   ],
   imports: [
     ParticlesModule,
