@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { AboutComponent } from "../pages/about/about.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { WelcomePageComponent } from "../pages/welcome-page/welcome-page.component";
-import UrlPaths from "./routes";
+import UrlPaths from "./UrlPaths";
 import { JourneyComponent } from "../pages/journeys/journeys.component";
 
 export const appRoutes: Routes = [
@@ -20,14 +20,14 @@ export const appRoutes: Routes = [
     path: "",
     component: WelcomePageComponent,
     data: { title: "About Kaminsky" }
-  },  
-  {
-    path: "**",
-    component: PageNotFoundComponent
-  },  
+  },
   {
     path: UrlPaths.journeys,
     component: JourneyComponent,
     data: { title: UrlPaths.journeys }
+  },  
+  {
+    path: "**",
+    component: PageNotFoundComponent
   }
 ];
