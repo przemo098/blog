@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import UrlPaths from "./routing/UrlPaths";
+// import UrlPaths from "./routing/UrlPaths";
 
 @Component({
   selector: "app-root",
@@ -7,7 +7,7 @@ import UrlPaths from "./routing/UrlPaths";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  journeys = UrlPaths.journeys;
+  // journeys = UrlPaths.journeys;
   title = "app";
   isNavMenu: boolean = false;
   navMinWidth: string;

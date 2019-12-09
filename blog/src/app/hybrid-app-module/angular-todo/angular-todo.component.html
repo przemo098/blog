@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-center todos">
   <form class="d-flex-column">
     <div class="d-flex">
-      <mat-form-field class="example-full-width">
+      <!-- <mat-form-field class="example-full-width">
         <input
           matInput
           placeholder="Task"
@@ -11,15 +11,15 @@
           [(ngModel)]="newItem.text"
           (ngModelChange)="onKeyDown()"
         />
-      </mat-form-field>
+      </mat-form-field> -->
       <div>
-        <button mat-raised-button color="primary" (click)="addItem()">
+        <!-- <button mat-raised-button color="primary" (click)="addItem()">
           Add task
-        </button>
+        </button> -->
       </div>
     </div>
 
-    <mat-nav-list>
+    <!-- <mat-nav-list>
       <mat-list-item *ngFor="let item of items">
         <div class="align-self-center">
           {{ item.text }}
@@ -31,6 +31,6 @@
           (click)="removeItem()"
         />
       </mat-list-item>
-    </mat-nav-list>
+    </mat-nav-list> -->
   </form>
 </div>

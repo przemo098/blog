@@ -1,4 +1,3 @@
-export default class UrlPaths{
+export class UrlPaths{
     static journeys  = 'journeys';
-    
 }
