@@ -1,41 +1,29 @@
 import { Component } from "react";
 import * as React from "react";
-import TodoServiceBus, { ITodoItem, TodoEventEnum } from "../../../shared/todoServiceBus";
-import { ITodoStore } from "../../../shared/todoStore";
-import TodoStore from "../../../shared/todoStore";
+import AppState, { TodoItem } from "shared/src";
 
-interface ITodoFormState{
-  currentItem: ITodoItem;
+interface ITodoFormState {
+  currentItem: TodoItem;
 }
 
 class TodoForm extends Component<any, ITodoFormState> {
-  todoStore: ITodoStore;
-  /**
-   *
-   */
   constructor(props: any) {
     super(props);
     this.state = {
-      currentItem: { text: "", key: Date.now() }
+      currentItem: AppState.newItem.value
     };
-    this.todoStore = TodoStore;
-    TodoServiceBus.subcribeTo(TodoEventEnum.InputTextChange, () =>
-    this.setState({
-      currentItem: TodoStore.newItem
-    })
-  );
   }
   inputElement: any = React.createRef();
 
-  componentDidUpdate() {
+  componentDidMount() {
+    AppState.newItem.subscribe(x => this.setState({
+      currentItem: x
+    }));
   }
 
-  handleUpdate(e: any){
+  handleUpdate(e: any) {
     const itemText = e.target.value;
-    TodoStore.updateNewItemText(itemText);
-    this.setState({
-      currentItem: TodoStore.newItem
-    });
+    AppState.newItem.next(new TodoItem(itemText))
   }
 
   render() {
@@ -45,10 +33,7 @@ class TodoForm extends Component<any, ITodoFormState> {
           <form
             onSubmit={e => {
               e.preventDefault();
-              TodoStore.add();
-              this.setState({
-                currentItem: TodoStore.newItem
-              })
+              AppState.items.next(AppState.items.value.concat(AppState.newItem.value))
             }}
           >
             <div className="input-group input-group-sm mb-3">
@@ -56,7 +41,7 @@ class TodoForm extends Component<any, ITodoFormState> {
                 <input
                   className="form-control"
                   placeholder="Task"
-                  ref = {this.inputElement}
+                  ref={this.inputElement}
                   value={(this.state.currentItem.text)}
                   onChange={(e) => this.handleUpdate(e)}
                 />
