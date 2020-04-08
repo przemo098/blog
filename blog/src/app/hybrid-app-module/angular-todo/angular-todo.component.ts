@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from "@angular/core";
+import { Component, AfterContentInit, ChangeDetectorRef } from "@angular/core";
 import AppState, { TodoItem } from '@przemo098/shared'
 
 @Component({
@@ -9,13 +9,19 @@ import AppState, { TodoItem } from '@przemo098/shared'
 export class AngularTodoComponent implements AfterContentInit {
   items: TodoItem[];
   newItem: TodoItem;
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.items = AppState.items.value;
     this.newItem = AppState.newItem.value;
   }
   ngAfterContentInit(): void {
-    AppState.newItem.subscribe(x => this.newItem = x);
-    AppState.items.subscribe(x => this.items = x);
+    AppState.newItem.subscribe(x => {
+      this.newItem = x
+      this.cdr.detectChanges();
+    });
+    AppState.items.subscribe(x => {
+      this.items = x
+      this.cdr.detectChanges();
+    });
   }
 
   onKeyDown() {
