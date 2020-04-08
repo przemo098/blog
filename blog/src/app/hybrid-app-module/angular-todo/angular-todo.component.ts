@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-// import ServiceBus, {
-//   ITodoItem,
-//   TodoEventEnum
-// } from "../../../../../shared/todoServiceBus";
-// import TodoStore from "../../../../../shared/todoStore";
+// import AppState, { TodoItem } from 'shared/src'
 
 @Component({
   selector: "app-angular-todo",
@@ -11,21 +7,24 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./angular-todo.component.scss"]
 })
 export class AngularTodoComponent implements OnInit {
+  // items: TodoItem[];
+  // newItem: TodoItem;
   constructor() {
-      // this.items = TodoStore.items;
-      // this.newItem = TodoStore.newItem;
+    // this.items = AppState.items.value;
+    // this.newItem = AppState.newItem.value;
   }
 
-  // onKeyDown(){
-  //   TodoStore.updateNewItemText(this.newItem.text)
-  // }
+  onKeyDown() {
+    // AppState.newItem.next(new TodoItem(this.newItem.text));
+  }
 
-  // addItem(){
-  //   TodoStore.add();
-  // }
+  addItem() {
+    // AppState.items.next(AppState.items.value.concat(AppState.newItem.value));
+    // AppState.newItem.next(new TodoItem());
+  }
 
-  // removeItem(){
-  //   TodoStore.delete(this.newItem);
+  // removeItem(item: TodoItem) {
+  //   AppState.items.next(AppState.items.value.filter(x => x !== item));
   // }
 
   ngOnInit() {
