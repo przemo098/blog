@@ -1,23 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
-
-export class TodoState {
-    items = new BehaviorSubject<Array<TodoItem>>([]);
-    newItem = new BehaviorSubject(new TodoItem());
-}
-
-export class TodoItem {
-    constructor(text: string = '') {
-        this.text = text;
-    }
-    key = Date.now();
-    text: string = '';
-}
-
-if (!(window as any).todoStore) {
-    (window as any).todoStore = new TodoState();
-}
-
-const AppState: TodoState = (window as any).todoStore;
-Object.freeze(AppState);
-
-export default AppState;
+export { TodoStateManager as StateManager } from "./stateManager";
+export { TodoItem } from "./todoState";
+export { TodoState } from "./todoState";
+import '../package.json'

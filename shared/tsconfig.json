@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2015",
+    "preserveConstEnums": true,
+    "sourceMap": true,
     "module": "commonjs",
     "declaration": true,
     "outDir": "lib",
     "strict": true,
-    "removeComments": true
+    "removeComments": true,
+    "resolveJsonModule": false,
   },
   "include": [
     "src/**/*"
