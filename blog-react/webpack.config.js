@@ -5,7 +5,7 @@ const path = require("path"),
 module.exports = {
   context: path.resolve(__dirname, "src"),
   entry: {
-    app: ["./index.tsx"]
+    app: ["./index.tsx", "../../shared/src/index.ts"]
   },
   output: {
     path: path.resolve(__dirname, "dist"),
