@@ -12,16 +12,12 @@ class App extends Component<any, any> {
 
   render() {
     return (
-      <div>
-        <div className="logo">
-        <img src={Logo as any}></img>
-        </div>
-        <div className="d-flex justify-content-center list-margin todos">
-          <div className="d-flex flex-column">
-            <div>
-              <TodoForm />
-              <TodoList />
-            </div>
+      <div className="todo-container">
+        <img className="logo" src={Logo as any}></img>
+        <div className="d-flex flex-column todo-list">
+          <div>
+            <TodoForm />
+            <TodoList />
           </div>
         </div>
       </div>

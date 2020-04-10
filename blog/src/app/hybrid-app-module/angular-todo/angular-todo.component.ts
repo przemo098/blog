@@ -1,5 +1,7 @@
 import { Component, AfterContentInit, ChangeDetectorRef } from "@angular/core";
-import AppState, { TodoItem } from '@przemo098/shared'
+import { TodoItem, } from '@przemo098/shared/index'
+import AppState from "@przemo098/shared/todoState";
+import { TodoStateManager } from "@przemo098/shared/stateManager";
 
 @Component({
   selector: "app-angular-todo",
@@ -9,6 +11,7 @@ import AppState, { TodoItem } from '@przemo098/shared'
 export class AngularTodoComponent implements AfterContentInit {
   items: TodoItem[];
   newItem: TodoItem;
+  private stateManager = new TodoStateManager();
   constructor(private cdr: ChangeDetectorRef) {
     this.items = AppState.items.value;
     this.newItem = AppState.newItem.value;
@@ -25,15 +28,14 @@ export class AngularTodoComponent implements AfterContentInit {
   }
 
   onKeyDown() {
-    AppState.newItem.next(new TodoItem(this.newItem.text));
+    this.stateManager.updateNewTodo(this.newItem.text);
   }
 
   addItem() {
-    AppState.items.next(AppState.items.value.concat(AppState.newItem.value));
-    AppState.newItem.next(new TodoItem());
+    this.stateManager.addNewElement();
   }
 
   removeItem(item: TodoItem) {
-    AppState.items.next(AppState.items.value.filter(x => x !== item));
+    this.stateManager.deleteByKey(item.key);
   }
 }

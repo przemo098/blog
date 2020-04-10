@@ -1,12 +1,15 @@
 import { Component } from "react";
 import * as React from "react";
-import AppState, { TodoItem } from "shared/src";
+import { TodoItem } from "shared/src";
+import AppState from "shared/src/todoState";
+import { TodoStateManager } from "shared/src/stateManager";
 
 interface ITodoFormState {
   currentItem: TodoItem;
 }
 
 class TodoForm extends Component<any, ITodoFormState> {
+  private stateManager = new TodoStateManager();
   constructor(props: any) {
     super(props);
     this.state = {
@@ -22,8 +25,7 @@ class TodoForm extends Component<any, ITodoFormState> {
   }
 
   handleUpdate(e: any) {
-    const itemText = e.target.value;
-    AppState.newItem.next(new TodoItem(itemText))
+    this.stateManager.updateNewTodo(e.target.value);
   }
 
   render() {
@@ -33,7 +35,7 @@ class TodoForm extends Component<any, ITodoFormState> {
           <form
             onSubmit={e => {
               e.preventDefault();
-              AppState.items.next(AppState.items.value.concat(AppState.newItem.value))
+              this.stateManager.addNewElement();
             }}
           >
             <div className="input-group input-group-sm mb-3">
