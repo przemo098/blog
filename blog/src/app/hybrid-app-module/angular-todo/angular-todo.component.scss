@@ -1,18 +1,18 @@
-:host{
-    display: flex;
-    justify-content: center;
-}
 
-.dupa{
-    background-color: red($color: #000000);
-    width: 100px;
-    height: 100px;
+.todo-line{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .logo {
     width: 80px;
     height: 80px;
     left: 0px;
+}
+
+.list-item{
+    display: flex;
+    justify-content: space-between;
 }
 
 .todos{
