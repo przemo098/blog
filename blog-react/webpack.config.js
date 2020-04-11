@@ -3,6 +3,9 @@ const path = require("path"),
   HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  devServer: {
+    https: true,
+  },
   context: path.resolve(__dirname, "src"),
   entry: {
     app: ["./index.tsx", "../../shared/src/index.ts"]
