@@ -32,6 +32,12 @@ $navBarColor: #24292e;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+}
+
+.github{
+  margin-top: auto;
 }
 
 .sidenav a {
