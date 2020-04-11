@@ -1,35 +1,33 @@
-<img src="assets/icons/angular_logo.svg"
-  class="logo" />
+<div class="todo-line">
+  <img src="assets/icons/angular_logo.svg"
+    class="logo" />
 
-<div class="d-flex justify-content-center todos">
-  <form class="d-flex-column">
-    <div class="d-flex">
-      <mat-form-field class="example-full-width">
-        <input matInput
-          placeholder="Task"
-          name="task"
-          [(ngModel)]="newItem.text"
-          (ngModelChange)="onKeyDown()" />
-      </mat-form-field>
-      <div>
-        <button mat-raised-button
-          color="primary"
-          (click)="addItem()">
-          Add task
-        </button>
-      </div>
+  <form class="todos">
+    <mat-form-field>
+      <input matInput
+        placeholder="Task"
+        name="task"
+        [(ngModel)]="newItem.text"
+        (ngModelChange)="onKeyDown()" />
+    </mat-form-field>
+    <div>
+      <button mat-raised-button
+        color="primary"
+        (click)="addItem()">
+        Add task
+      </button>
     </div>
-
-    <mat-nav-list>
-      <mat-list-item *ngFor="let item of items">
-        <div class="align-self-center">
-          {{ item.text }}
-        </div>
-
-        <img src="./assets/cancel.svg"
-          class="ml-auto cancel-svg"
-          (click)="removeItem(item)" />
-      </mat-list-item>
-    </mat-nav-list>
   </form>
 </div>
+
+<mat-nav-list>
+  <mat-list-item *ngFor="let item of items">
+    <div>
+      {{ item.text }}
+    </div>
+
+    <img src="./assets/cancel.svg"
+      class="cancel-svg"
+      (click)="removeItem(item)" />
+  </mat-list-item>
+</mat-nav-list>

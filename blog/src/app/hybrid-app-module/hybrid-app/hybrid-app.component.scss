@@ -1,12 +1,7 @@
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
 :host {
-    // @extend .flex-wrap;
+    display: flex;
     width: 100%;
-    // display: flex;
-}
-
-.application{
-    min-width: 410px;
-    flex-grow: 1;
+    justify-content: space-around;
 }
