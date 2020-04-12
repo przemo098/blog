@@ -7,10 +7,8 @@ import { PageNotFoundComponent } from './routing/page-not-found/page-not-found.c
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routing/routing';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
-import { ParticlesModule } from 'angular-particle';
 import { AboutModule } from './pages/about/about.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 import { JourneyComponent } from './pages/journeys/journeys.component';
 
 @NgModule({
@@ -21,23 +19,17 @@ import { JourneyComponent } from './pages/journeys/journeys.component';
     JourneyComponent
   ],
   imports: [
-    ParticlesModule,
     FormsModule,
     BrowserAnimationsModule,
 
     // PrimeNG
     AboutModule,
     BrowserModule,
-    // ButtonModule,
-    // MenuModule,
-    // MenubarModule,
-    // SidebarModule,
     RouterModule.forRoot(
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
     ),
-    HttpClientModule, 
-    AngularSvgIconModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

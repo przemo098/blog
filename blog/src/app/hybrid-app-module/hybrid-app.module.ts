@@ -6,7 +6,9 @@ import { HybridAppComponent } from './hybrid-app/hybrid-app.component';
 import { ReactComponent } from './react/react.component';
 import { AngularTodoComponent } from './angular-todo/angular-todo.component';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [

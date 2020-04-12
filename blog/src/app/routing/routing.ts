@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'hybrid',
-    loadChildren: './hybrid-app-module/hybrid-app.module#HybridAppModule',
+    loadChildren: () => import('../hybrid-app-module/hybrid-app.module').then(m => m.HybridAppModule),
     data: {}
   },
   {
