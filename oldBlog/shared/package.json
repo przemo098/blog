@@ -1,0 +1,16 @@
+{
+  "name": "@przemo098/shared",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && cp ./package.json ./lib/package.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "rxjs": "^6.5.5"
+  }
+}
