@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import CvParagraph from './CvParagraph';
-
-const LeftTd = styled.td`
-  font-weight: bold;
-`;
-
+import CvLeftTd from "./Components/CvLeftTd";
 
 export default function CvContact() {
   return <div>
@@ -13,19 +8,19 @@ export default function CvContact() {
     <table>
       <tbody>
       <tr>
-        <LeftTd>Name Surname:</LeftTd>
+        <CvLeftTd>Name Surname:</CvLeftTd>
         <td>Przemysław Kamiński:</td>
       </tr>
       <tr>
-        <LeftTd>Birth date:</LeftTd>
+        <CvLeftTd>Birth date:</CvLeftTd>
         <td>07.07.1993</td>
       </tr>
       <tr>
-        <LeftTd>Telephone:</LeftTd>
+        <CvLeftTd>Telephone:</CvLeftTd>
         <td>+48 729 553 162</td>
       </tr>
       <tr>
-        <LeftTd>E-mail:</LeftTd>
+        <CvLeftTd>E-mail:</CvLeftTd>
         <td>kaminski.przemyslaw@hotmail.com</td>
       </tr>
       </tbody>

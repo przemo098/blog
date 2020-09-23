@@ -1,14 +1,14 @@
 import React from 'react';
 import CvParagraph from './CvParagraph';
+import {IWorkUnit} from "./data";
+import {CvData} from "./data";
 
-interface IBlockProps {
-  placeWithDate: string,
-  jobTitle: string,
-}
-
-const Block = (props: IBlockProps) => {
+const Block = (props: IWorkUnit) => {
   return <>
     <b>{props.placeWithDate}</b> {props.jobTitle}
+    <br/>
+    <i>Description:</i> {props.description} <br/>
+    <i>Tech stack:</i> {props.techStack}<br/>
   </>;
 };
 
@@ -16,6 +16,6 @@ const Block = (props: IBlockProps) => {
 export default function() {
   return <div>
     <CvParagraph text={'WORK EXPERIENCE'}/>
-    <Block placeWithDate={'Danske Bank (11.2019 – today)'} jobTitle={'Consultant'}></Block>
+    {CvData.map(x => <Block {...x}></Block>)}
   </div>;
 }

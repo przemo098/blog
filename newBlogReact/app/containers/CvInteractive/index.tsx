@@ -1,14 +1,18 @@
 import React from 'react';
 import CvHeader from './cvHeader';
-import CvContact from './contact';
 import CvWorkExprience from './CvWorkExprience';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import ExposureIcon from '@material-ui/icons/Exposure';
+import CvContact from "./CvContact";
+import CvEducation from "./CvEducation";
+import CvQualifications from "./CvQualifications";
 
 export default function CvInteractive() {
   return <React.Fragment>
+    <ExposureIcon/>
     <CvHeader/>
     <CvContact/>
     <CvWorkExprience/>
-
+    <CvEducation/>
+    <CvQualifications/>
   </React.Fragment>;
 }
