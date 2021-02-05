@@ -6,15 +6,15 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  margin-bottom: 0px
+  margin-bottom: 0px;
 `;
 
 export default function CvHeader() {
-  return <Wrapper>
-    <div className="cv-header">
-      <Header>Curriculum Vitae</Header>
-    </div>
-  </Wrapper>
-
-
+  return (
+    <Wrapper>
+      <div className="cv-header">
+        <Header>Curriculum Vitae</Header>
+      </div>
+    </Wrapper>
+  );
 }
