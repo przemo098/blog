@@ -19,8 +19,8 @@ export default function CvWorkExprience() {
   return (
     <div>
       <CvParagraph text={'WORK EXPERIENCE'} />
-      {CvData.map(x => (
-        <Block {...x}></Block>
+      {CvData.map((x, i) => (
+        <Block key={i} {...x}></Block>
       ))}
     </div>
   );

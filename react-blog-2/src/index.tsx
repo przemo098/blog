@@ -31,7 +31,7 @@ import './locales/i18n';
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
+const openSansObserver = new FontFaceObserver('Roboto', {});
 
 // When Inter is loaded, add a font-family using Inter to the body
 openSansObserver.load().then(() => {
