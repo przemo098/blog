@@ -1,9 +1,11 @@
 import React from 'react';
 import CvParagraph from './CvParagraph';
-import { IWorkUnit } from './data';
-import { CvData } from './data';
+import { IWorkUnit, CvData } from './data';
+import { ICvInterActiveFilters } from './index';
 
-const Block = (props: IWorkUnit) => {
+function Block(props: IWorkUnit & ICvInterActiveFilters) {
+  // if(props.showBe && props.)
+
   return (
     <>
       <b>{props.placeWithDate}</b> {props.jobTitle}
@@ -13,14 +15,14 @@ const Block = (props: IWorkUnit) => {
       <br />
     </>
   );
-};
+}
 
-export default function() {
+export default function(props: ICvInterActiveFilters) {
   return (
     <div>
-      <CvParagraph text={'WORK EXPERIENCE'} />
+      <CvParagraph text="WORK EXPERIENCE" />
       {CvData.map(x => (
-        <Block {...x} />
+        <Block {...x} {...props} />
       ))}
     </div>
   );
