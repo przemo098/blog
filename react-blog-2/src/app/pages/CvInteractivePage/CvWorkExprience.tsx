@@ -9,7 +9,7 @@ const Block = (props: IWorkUnit) => {
       <b>{props.placeWithDate}</b> {props.jobTitle}
       <br />
       <i>Description:</i> {props.description} <br />
-      <i>Tech stack:</i> {props.techStack}
+      {/*<i>Tech stack:</i> {props.techStack}*/}
       <br />
     </>
   );

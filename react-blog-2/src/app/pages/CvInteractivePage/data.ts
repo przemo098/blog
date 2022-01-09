@@ -130,9 +130,21 @@ export const CvData: IWorkUnit[] = [
       'FRTB CVA (Fundamental Review of the Trading Book) – Basel III implementation, government directive,\n' +
       'Fully automated calculation of all trade risks - stocks / options / FX etc.\n' +
       'System design and implementation / gathering business requirements / presentations',
-    techStack:
-      'React, Typescript, RxJs, ASP.NET, SQL server, EntityFramework Primo Grid (internal grid),\n' +
-      'TFS (Repos, Boards, Test Plans)',
+    frontend: {
+      techStack: 'React, Typescript, RxJs',
+      description:
+        'Managment dashboard for changing configuration in risk calculation',
+    },
+    backend: {
+      techStack:
+        'ASP.NET, SQL server, EntityFramework Primo Grid (internal grid)',
+      description:
+        'Handling configuration management and applying it between system runs',
+    },
+    devops: {
+      description: '',
+      techStack: 'TFS (Repos, Boards, Test Plans)',
+    },
   },
   {
     placeWithDate: 'Bank for International Settlements (07.2018 – 03.2019)',
@@ -140,10 +152,21 @@ export const CvData: IWorkUnit[] = [
     description:
       'Switzerland – Confidential (Security systems, ERP, DataHubs), adding enhancements for existing\n' +
       'workflows e.g. access / document management etc., as far as creating brand new flows with UI',
-    techStack:
-      'C#, ASP.NET web api, Microsoft workflow foundation, React, Angular 1.6 and 6-7, Quartz,\n' +
-      'Entity Framework, SQL server, queues, SpecFlow, Moq, Nunit, TFS, IOS development\n' +
-      'TFS (Repos, Boards, Test Plans, self hostet, release management)',
+    frontend: {
+      description: '',
+      techStack: 'React, Angular 1.6 and 6-7',
+    },
+    devops: {
+      description: '',
+      techStack:
+        'TFS (Repos, Boards, Test Plans, self hostet, release management)',
+    },
+    backend: {
+      description: '',
+      techStack:
+        'C#, ASP.NET web api, Microsoft workflow foundation, Quartz, Entity Framework, SQL server, ' +
+        'queues, SpecFlow, Moq, Nunit, TFS, IOS development',
+    },
   },
   {
     placeWithDate:
@@ -151,50 +174,110 @@ export const CvData: IWorkUnit[] = [
     jobTitle: 'Specialist Developer (Vice President) ',
     description:
       'Green field project based on internal cloud with microservices in Docker containers',
-    techStack:
-      '.NET Core 2 , Kafka, EF core, sqlServer 2014, Xunit, Nsubstitute, Angular5, AgGrid,\n' +
-      'HTML / CSS + TypeScript, Karma + Jasmine, Jenkins + PowerShell / MsBuild',
+    frontend: {
+      description: '',
+      techStack: 'Angular5, AgGrid, HTML / CSS + TypeScript, Karma + Jasmine',
+    },
+    devops: {
+      description: '',
+      techStack: 'Jenkins',
+    },
+    backend: {
+      description: '',
+      techStack:
+        '.NET Core 2 , Kafka, EF core, sqlServer 2014, Xunit, Nsubstitute, PowerShell, MsBuild',
+    },
   },
   {
     placeWithDate: 'Valentinite',
     jobTitle: 'Backend Developer (08.2017- 12.2017)',
     description:
       'Improvement of Allexis – application responsible for sharing data, nondisclosure agreement',
-    techStack:
-      '(.NET core 2, ElasticSearch, PostgreSql, NUnit, AWS, ActiveMQ, React, CSS/HTML, NAnt)\n' +
-      'Creating application for sharing data and localization.\n',
+    frontend: {
+      description: '',
+      techStack: 'React, CSS/HTML',
+    },
+    devops: {
+      description: '',
+      techStack: '',
+    },
+    backend: {
+      description: '',
+      techStack:
+        '.NET core 2, ElasticSearch, PostgreSql, NUnit, AWS, ActiveMQ, NAnt',
+    },
   },
   {
     placeWithDate: 'Credit Suisse',
     jobTitle: 'Technical analyst (04.2016 – 07.2017)',
     description:
       'IImprovement of MDS – Market data server, writing web and desktop apps for internal usage.',
-    techStack:
-      'Frontend - React. TSX, MobX, HTML, CSS, Webpack 2, Jasmine, Karma\n' +
-      'Backend - C#, ASP.NET Web API 2, Elasticsearch, Coherence, Nunit, Moq, Python, Django, Java\n' +
-      'Desktop -WPF MVVM + XAML, MahApps Metro UI, AntlR',
+    frontend: {
+      description: '',
+      techStack: 'React. TSX, MobX, HTML, CSS, Webpack 2, Jasmine, Karma',
+    },
+    devops: {
+      description: '',
+      techStack: '',
+    },
+    backend: {
+      description: '',
+      techStack:
+        'Backend - C#, ASP.NET Web API 2, Elasticsearch, Coherence, Nunit, Moq, Python, Django, Java\n' +
+        'Desktop -WPF MVVM + XAML, MahApps Metro UI, AntlR',
+    },
   },
   {
     placeWithDate: 'Ceneo.pl',
     jobTitle: 'Junior Developer (01.2016- 03.2016)',
     description: 'Developing of biggest Polish price comparison website',
-    techStack:
-      'ASP.NET MVC ElasticSearch, MongoDB, Redis,\n' +
-      'SQL server, RabbitMq, NUnit, CastleWindsor, javaScript, jQuery, HTML)',
+    frontend: {
+      description: '',
+      techStack: 'javaScript, jQuery, HTML',
+    },
+    devops: {
+      description: '',
+      techStack: '',
+    },
+    backend: {
+      description: '',
+      techStack:
+        'ASP.NET MVC ElasticSearch, MongoDB, Redis, SQL server, RabbitMq, NUnit, CastleWindsor',
+    },
   },
   {
     placeWithDate: 'Unit4',
     jobTitle: 'Junior Software Engineer (07.2015- 12.2015)',
-    description: 'Developing of biggest Polish price comparison website',
-    techStack:
-      '(Developing Agresso, an ERP system with C# .NET, TopGen and SQL server,\n' +
-      'NUnit, Rhino Mocks 80% test coverage)\n',
+    description: 'Agresso development (4th biggest ERP system)',
+    frontend: {
+      description: '',
+      techStack: '',
+    },
+    devops: {
+      description: '',
+      techStack: '',
+    },
+    backend: {
+      description: '',
+      techStack: 'C# .NET, TopGen and SQL server, NUnit, Rhino Mocks',
+    },
   },
   {
     placeWithDate: 'Volvo IT',
     jobTitle: 'Internship (06.2014-09.2014)',
     description:
       'Developing internal application for bus technical condition analysis.',
-    techStack: 'Java JSF, HTML, CSS,\n' + 'JavaScript, SAXParser XML)',
+    frontend: {
+      description: '',
+      techStack: 'HTML, CSS, JavaScript',
+    },
+    devops: {
+      description: '',
+      techStack: '',
+    },
+    backend: {
+      description: '',
+      techStack: 'Java EE, JSF, SAXParser XML',
+    },
   },
 ];
