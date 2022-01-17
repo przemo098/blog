@@ -2,6 +2,7 @@ import React from 'react';
 import CvParagraph from './CvParagraph';
 import { IWorkUnit } from './data';
 import { CvData } from './data';
+import { Specialization } from './cvSpecialization';
 
 const Block = (props: IWorkUnit) => {
   return (
@@ -9,7 +10,9 @@ const Block = (props: IWorkUnit) => {
       <b>{props.placeWithDate}</b> {props.jobTitle}
       <br />
       <i>Description:</i> {props.description} <br />
-      {/*<i>Tech stack:</i> {props.techStack}*/}
+      <Specialization specialization={props.frontend} position="FE" />
+      <Specialization specialization={props.backend} position="BE" />
+      <Specialization specialization={props.devops} position="DevOps" />
       <br />
     </>
   );
