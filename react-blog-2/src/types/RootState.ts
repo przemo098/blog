@@ -12,6 +12,6 @@ import { ICvFilterState } from '../app/pages/CvInteractivePage/slice-CV';
 export interface RootState {
   theme?: ThemeState;
   githubRepoForm?: GithubRepoFormState;
-  cvFilters?: ICvFilterState;
+  cvFilters: ICvFilterState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

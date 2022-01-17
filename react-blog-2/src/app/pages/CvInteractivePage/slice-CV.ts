@@ -17,7 +17,7 @@ export const sliceCV = createSlice({
   initialState,
   reducers: {
     switchFeFilter(state) {
-      state.isFeSelected = !state.isFeSelected;
+      return { ...state, isFeSelected: !state.isFeSelected };
     },
     switchBeFilter(state) {
       state.isBeSelected = !state.isBeSelected;
