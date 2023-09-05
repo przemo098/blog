@@ -4,28 +4,18 @@ interface ICvFilterState {
   isFeSelected: boolean;
   isBeSelected: boolean;
   isDevOpsSelected: boolean;
-  // update: (values: Partial<ICvFilterState>) => void;
-  // switchFeFilter: () => void;
-  // switchBeFilter: () => void;
-  // switchDevOpsFilter: () => void;
 }
 
-/* eslint-disable */
+const defaultState: ICvFilterState = {
+  isFeSelected: false,
+  isDevOpsSelected: false,
+  isBeSelected: false,
+}
 
-export const CvState = new Store<ICvFilterState>({
-    isFeSelected: false,
-    isDevOpsSelected: false,
-    isBeSelected: false,
-    // switchFeFilter: () => CvState.set(previous =>({isFeSelected: !previous.isFeSelected})),
-});
-// Object.create()
+export const CvState = new Store<ICvFilterState>(defaultState);
 export const CvSateController = {
-    switchFeFilter: () => CvState.update(({isFeSelected: !CvState.state.isFeSelected})),
-    switchBeFilter: () => CvState.update(({isBeSelected: !CvState.state.isBeSelected})),
-    switchDevOpsFilter: () => CvState.update(({isDevOpsSelected: !CvState.state.isDevOpsSelected})),
+  switchFeFilter: () => CvState.update(({isFeSelected: !CvState.state.isFeSelected})),
+  switchBeFilter: () => CvState.update(({isBeSelected: !CvState.state.isBeSelected})),
+  switchDevOpsFilter: () => CvState.update(({isDevOpsSelected: !CvState.state.isDevOpsSelected})),
+  resetFilters: () => CvState.update((defaultState)),
 }
-
-
-
-
-/* eslint-disable */
