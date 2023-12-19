@@ -64,17 +64,15 @@ export default function CvQualifications() {
           </tr>
           <tr>
             <CvLeftTd>Languages</CvLeftTd>
-            <Td>• Polish(Native) • English (C1+) • Spanish(A2) </Td>
+            <Td> Polish(Native) • English (C1+) • Spanish(A2) </Td>
           </tr>
           <tr>
             <CvLeftTd>Interests</CvLeftTd>
-            <Td>• Market / Stock trading • Mobile Phones • Bachata / Salsa</Td>
+            <Td> Market / Stock trading • Mobile Phones • Bachata / Salsa</Td>
           </tr>
           <tr>
             <CvLeftTd>Others</CvLeftTd>
-            <Td>
-              • Driver license (category B) • Yacht skipper • Foosball player
-            </Td>
+            <Td> Driver license (category B) • Yacht skipper • Foosball player</Td>
           </tr>
           <tr>
             <CvLeftTd>Achievements</CvLeftTd>
