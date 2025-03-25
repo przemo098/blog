@@ -1,3 +1,5 @@
+'use client';
+
 import CvParagraph from './CvParagraph';
 import CvLeftTd from './Components/CvLeftTd';
 
@@ -5,7 +7,7 @@ export default function CvEducation() {
   return (
     <div>
       <CvParagraph text={'EDUCATION'} />
-      <table>
+      <table className="w-full">
         <tbody>
           <tr>
             <CvLeftTd>02.2012 – 10.2017</CvLeftTd>

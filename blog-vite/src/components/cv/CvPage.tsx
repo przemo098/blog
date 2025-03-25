@@ -1,13 +1,13 @@
 'use client';
 
-import CvHeader from '@/pages/CvInteractivePage/cvHeader';
-import CvWorkExperience from '@/pages/CvInteractivePage/CvWorkExprience';
-import CvContact from '@/pages/CvInteractivePage/CvContact';
-import CvEducation from '@/pages/CvInteractivePage/CvEducation';
-import CvQualifications from '@/pages/CvInteractivePage/CvQualifications';
 import { Card, CardContent } from '@mui/material';
+import CvHeader from './CvHeader';
+import CvWorkExperience from './CvWorkExperience';
+import CvContact from './CvContact';
+import CvEducation from './CvEducation';
+import CvQualifications from './CvQualifications';
 
-export default function CV() {
+export function CvPage() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <Card className="max-w-[1000px] m-6">

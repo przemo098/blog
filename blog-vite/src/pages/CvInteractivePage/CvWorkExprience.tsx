@@ -1,8 +1,10 @@
+'use client';
+
 import CvParagraph from './CvParagraph';
 import { CvData, IWorkUnit } from './data';
 import { Specialization } from './cvSpecialization';
-import {useUnwrap} from "../../utils/hooks.ts";
-import {CvState} from "./slice-CV.ts";
+import { useUnwrap } from "@/utils/hooks";
+import { CvState } from "./slice-CV";
 
 const Block = (props: IWorkUnit) => {
   const cvFilters = useUnwrap(CvState);

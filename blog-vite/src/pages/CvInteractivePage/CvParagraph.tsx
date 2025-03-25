@@ -5,10 +5,10 @@ interface IProps {
 export default function CvParagraph(props: IProps) {
   return (
     <>
-      <p style={{marginBottom: 0}}>
+      <p className="mb-0">
         <b>{props.text}</b>
       </p>
-      <hr style={{marginTop: 0}} />
+      <hr className="mt-0" />
     </>
   );
 }

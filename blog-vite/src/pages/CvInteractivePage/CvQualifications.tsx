@@ -1,3 +1,5 @@
+'use client';
+
 import CvParagraph from './CvParagraph';
 import React from "react";
 
@@ -5,25 +7,27 @@ interface IElementProps {
   children: React.ReactNode;
 }
 
-function CvLeftTd(props: IElementProps){
-  return <td style={{  width: 200,
-    fontWeight: 'bold',
-    border: '1px solid black'}}>
-    {props.children}
-  </td>
+function CvLeftTd({ children }: IElementProps) {
+  return (
+    <td className="w-[200px] font-bold border border-black p-2">
+      {children}
+    </td>
+  );
 }
 
-function Td(props: IElementProps){
-  return <td style={{ border: '1px solid black'}}>
-    {props.children}
-  </td>
+function Td({ children }: IElementProps) {
+  return (
+    <td className="border border-black p-2">
+      {children}
+    </td>
+  );
 }
 
 export default function CvQualifications() {
   return (
     <div>
       <CvParagraph text={'QUALIFICATIONS'} />
-      <table>
+      <table className="w-full border-collapse">
         <tbody>
           <tr>
             <CvLeftTd>Core programming languages</CvLeftTd>

@@ -1,3 +1,5 @@
+'use client';
+
 import CvParagraph from './CvParagraph';
 import CvLeftTd from './Components/CvLeftTd';
 
@@ -5,7 +7,7 @@ export default function CvContact() {
   return (
     <div>
       <CvParagraph text={'Contact'} />
-      <table>
+      <table className="w-full">
         <tbody>
           <tr>
             <CvLeftTd>Name Surname:</CvLeftTd>
