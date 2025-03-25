@@ -1,3 +1,5 @@
+'use client';
+
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -7,16 +9,16 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import { useUnwrap } from '../../utils/hooks';
-import {LayoutStore} from "./LayoutStore.ts";
+import { LayoutStore } from "./LayoutStore";
 import ArticleIcon from '@mui/icons-material/Article';
-import { useNavigate } from "react-router-dom";
-
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SideBar() {
-  const {isSideBarVisible} = useUnwrap(LayoutStore);
-  const navigate = useNavigate();
+  const { isSideBarVisible } = useUnwrap(LayoutStore);
+  const router = useRouter();
 
-  if(!isSideBarVisible)
+  if (!isSideBarVisible)
     return null;
 
   return (
@@ -24,13 +26,11 @@ export default function SideBar() {
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('./CV')}>
+            <ListItemButton onClick={() => router.push('/cv')}>
               <ListItemIcon>
                 <ArticleIcon />
               </ListItemIcon>
               <ListItemText primary="CV" />
-              {/*<Link to={'/cv'}/>*/}
-
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -52,7 +52,7 @@ export default function SideBar() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component={Link} href="#simple-list">
               <ListItemText primary="Spam" />
             </ListItemButton>
           </ListItem>
