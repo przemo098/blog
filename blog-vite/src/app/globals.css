@@ -9,6 +9,7 @@
 }
 
 body {
+  overflow-anchor: none;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
     to bottom,
@@ -16,4 +17,16 @@ body {
     rgb(var(--background-end-rgb))
   )
   rgb(var(--background-start-rgb));
+}
+
+/* Print styles for react-to-print (prints only CV content ref) */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .shadow-xl, .shadow-lg, .shadow-md {
+    box-shadow: none !important;
+  }
 } 

@@ -4,11 +4,11 @@ interface IProps {
 
 export default function CvParagraph(props: IProps) {
   return (
-    <>
-      <p className="mb-0">
-        <b>{props.text}</b>
-      </p>
-      <hr className="mt-0" />
-    </>
+    <div className="mb-4">
+      <h2 className="text-lg font-bold text-slate-800 uppercase tracking-wider m-0">
+        {props.text}
+      </h2>
+      <div className="mt-1 h-0.5 bg-gradient-to-r from-slate-800 to-transparent rounded" />
+    </div>
   );
 }
