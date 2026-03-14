@@ -11,34 +11,27 @@ interface Message {
   content: string;
 }
 
-type Provider = 'claude' | 'none';
+type Provider = 'claude' | 'openai' | 'gemini' | 'grok' | 'ollama' | 'none';
 
 const DUMMY_RESPONSE =
-  'This is a demo chatbot. To enable real AI responses, click the ⚙ icon and provide your API token for one of the supported providers: Claude (Anthropic), Grok, Gemini, or ChatGPT.';
+  'This is a demo chatbot. To enable real AI responses, click the settings icon and select a provider.';
 
-async function callClaude(messages: Message[], token: string): Promise<string> {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+const TOKEN_PLACEHOLDERS: Record<string, string> = {
+  claude: 'sk-ant-...',
+  openai: 'sk-...',
+  gemini: 'AI...',
+  grok: 'xai-...',
+};
+
+async function callApi(provider: string, messages: Message[], token: string): Promise<string> {
+  const res = await fetch('/api/chat', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': token,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1024,
-      messages: messages.map((m) => ({ role: m.role, content: m.content })),
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ provider, messages, token: token || undefined }),
   });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Claude API error (${res.status}): ${err}`);
-  }
-
   const data = await res.json();
-  return data.content?.[0]?.text ?? 'No response from Claude.';
+  if (!res.ok) throw new Error(data.error || `API error (${res.status})`);
+  return data.reply;
 }
 
 export default function ChatPage() {
@@ -46,7 +39,7 @@ export default function ChatPage() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [provider, setProvider] = useState<Provider>('none');
+  const [provider, setProvider] = useState<Provider>('ollama');
   const [token, setToken] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -67,8 +60,8 @@ export default function ChatPage() {
     try {
       let reply: string;
 
-      if (provider === 'claude' && token) {
-        reply = await callClaude(newMessages, token);
+      if (provider !== 'none' && (provider === 'ollama' || token)) {
+        reply = await callApi(provider, newMessages, token);
       } else {
         await new Promise((r) => setTimeout(r, 600));
         reply = DUMMY_RESPONSE;
@@ -94,12 +87,12 @@ export default function ChatPage() {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <SmartToyIcon className="text-slate-300" fontSize="small" />
             <h1 className="text-base sm:text-lg font-semibold text-white">Chat Bot</h1>
-            {provider === 'claude' && token && (
+            {provider !== 'none' && (provider === 'ollama' || token) && (
               <span className="text-xs bg-emerald-600 text-white px-2 py-0.5 rounded-full ml-2">
-                Claude connected
+                {provider === 'ollama' ? 'Custom AI by PK' : `${provider} connected`}
               </span>
             )}
-            {provider === 'none' && (
+            {(provider === 'none' || (provider !== 'ollama' && !token)) && (
               <span className="text-xs bg-slate-600 text-slate-300 px-2 py-0.5 rounded-full ml-2">
                 Demo mode
               </span>
@@ -125,22 +118,31 @@ export default function ChatPage() {
               >
                 <option value="none">None (Demo)</option>
                 <option value="claude">Claude (Anthropic)</option>
+                <option value="openai">ChatGPT (OpenAI)</option>
+                <option value="gemini">Gemini (Google)</option>
+                <option value="grok">Grok (xAI)</option>
+                <option value="ollama">Custom AI by PK (Free)</option>
               </select>
             </div>
-            {provider === 'claude' && (
+            {provider !== 'none' && provider !== 'ollama' && (
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">API Token</label>
                 <input
                   type="password"
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
-                  placeholder="sk-ant-..."
+                  placeholder={TOKEN_PLACEHOLDERS[provider] || 'Enter token...'}
                   className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
                 />
                 <p className="text-xs text-slate-500 mt-1">
-                  Your token stays in the browser and is sent directly to Anthropic API. It is never stored on any server.
+                  Your token is sent to the server only to proxy the request. It is never stored.
                 </p>
               </div>
+            )}
+            {provider === 'ollama' && (
+              <p className="text-xs text-slate-500">
+                Custom AI by PK — runs locally, no API token needed.
+              </p>
             )}
           </div>
         )}

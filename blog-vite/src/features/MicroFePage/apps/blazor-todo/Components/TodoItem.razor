@@ -1,0 +1,81 @@
+@namespace BlazorTodo.Components
+@using BlazorTodo.Models
+
+<li style="display: flex; align-items: center; gap: 8px; padding: 2px 0;" data-testid="blazor-todo-item">
+    <input
+        type="checkbox"
+        checked="@Item.Completed"
+        @onchange="() => OnToggle.InvokeAsync(Item)"
+    />
+    @if (editing)
+    {
+        <input
+            data-testid="blazor-todo-edit"
+            type="text"
+            @bind="editText"
+            @bind:event="oninput"
+            @onkeydown="HandleEditKeyDown"
+            @onblur="SaveEdit"
+            style="flex: 1; padding: 4px 8px; border: 1px solid #60a5fa; border-radius: 4px; font-size: 14px; outline: none;"
+        />
+    }
+    else
+    {
+        <span
+            @ondblclick="StartEdit"
+            style="@($"flex: 1; cursor: pointer; {(Item.Completed ? "text-decoration: line-through; color: #94a3b8;" : "color: #334155;")}")"
+        >
+            @Item.Text
+        </span>
+    }
+    <button
+        @onclick="StartEdit"
+        style="background: none; border: none; font-size: 12px; color: #94a3b8; cursor: pointer;"
+    >
+        edit
+    </button>
+    <button
+        @onclick="() => OnDelete.InvokeAsync(Item.Id)"
+        style="background: none; border: none; font-size: 12px; color: #94a3b8; cursor: pointer;"
+    >
+        delete
+    </button>
+</li>
+
+@code {
+    private bool editing;
+    private string editText = "";
+
+    [Parameter, EditorRequired]
+    public TodoItemModel Item { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<TodoItemModel> OnToggle { get; set; }
+
+    [Parameter]
+    public EventCallback<(string Id, string Text)> OnEdit { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnDelete { get; set; }
+
+    private void StartEdit()
+    {
+        editing = true;
+        editText = Item.Text;
+    }
+
+    private async Task SaveEdit()
+    {
+        if (editing && !string.IsNullOrWhiteSpace(editText))
+        {
+            await OnEdit.InvokeAsync((Item.Id, editText.Trim()));
+        }
+        editing = false;
+        editText = "";
+    }
+
+    private async Task HandleEditKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await SaveEdit();
+    }
+}

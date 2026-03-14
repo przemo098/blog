@@ -13,6 +13,17 @@
 # production
 /build
 
+# micro FE build artifacts
+/public/micro-fe/
+
+# micro FE sub-project artifacts
+src/features/MicroFePage/apps/*/node_modules/
+src/features/MicroFePage/apps/*/dist/
+src/features/MicroFePage/apps/*/package-lock.json
+src/features/MicroFePage/apps/angular-todo/.angular/
+src/features/MicroFePage/apps/blazor-todo/bin/
+src/features/MicroFePage/apps/blazor-todo/obj/
+
 # misc
 .DS_Store
 *.pem

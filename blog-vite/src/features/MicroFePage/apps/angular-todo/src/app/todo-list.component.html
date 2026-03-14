@@ -1,0 +1,15 @@
+<div class="todo-container">
+  <app-todo-form (add)="addTodo($event)" />
+
+  <p *ngIf="items.length === 0" class="empty">No todos yet</p>
+
+  <ul class="todo-list">
+    <app-todo-item
+      *ngFor="let item of items"
+      [item]="item"
+      (toggle)="toggleComplete($event)"
+      (edit)="updateTodo($event)"
+      (delete)="deleteTodo($event)"
+    />
+  </ul>
+</div>

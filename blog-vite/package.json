@@ -5,6 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:angular-mfe": "cd src/features/MicroFePage/apps/angular-todo && npm install && npm run build && mkdir -p ../../../../../public/micro-fe/angular && cp -r dist/* ../../../../../public/micro-fe/angular/",
+    "build:vue-mfe": "cd src/features/MicroFePage/apps/vue-todo && npm install && npm run build && mkdir -p ../../../../../public/micro-fe/vue && cp -r dist/* ../../../../../public/micro-fe/vue/",
+    "build:blazor-mfe": "cd src/features/MicroFePage/apps/blazor-todo && dotnet publish -c Release -o bin/publish && mkdir -p ../../../../../public/micro-fe/blazor && cp -r bin/publish/wwwroot/* ../../../../../public/micro-fe/blazor/",
+    "build:mfe": "npm run build:angular-mfe && npm run build:vue-mfe && npm run build:blazor-mfe",
+    "build:all": "npm run build:mfe && next build",
     "start": "next start",
     "lint": "next lint"
   },

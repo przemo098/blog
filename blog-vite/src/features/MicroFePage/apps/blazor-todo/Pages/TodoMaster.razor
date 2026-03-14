@@ -1,0 +1,68 @@
+@namespace BlazorTodo.Pages
+@using BlazorTodo.Components
+@using BlazorTodo.Models
+@inject IJSRuntime JS
+
+<div style="font-family: system-ui, sans-serif; font-size: 14px;">
+    <TodoForm OnAdd="AddTodo" />
+
+    @if (!items.Any())
+    {
+        <p style="color: #94a3b8; font-style: italic;">No todos yet</p>
+    }
+
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        @foreach (var item in items)
+        {
+            <TodoItem
+                Item="item"
+                OnToggle="ToggleComplete"
+                OnEdit="EditTodo"
+                OnDelete="DeleteTodo"
+            />
+        }
+    </ul>
+</div>
+
+@code {
+    private List<TodoItemModel> items = new();
+    private DotNetObjectReference<TodoMaster>? dotNetRef;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dotNetRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("blazorTodoBridge.init", dotNetRef);
+    }
+
+    [JSInvokable]
+    public void OnStateChanged(TodoItemModel[] newItems)
+    {
+        items = newItems.ToList();
+        StateHasChanged();
+    }
+
+    private async Task AddTodo(string text)
+    {
+        await JS.InvokeVoidAsync("blazorTodoBridge.addTodo", text);
+    }
+
+    private async Task ToggleComplete(TodoItemModel item)
+    {
+        await JS.InvokeVoidAsync("blazorTodoBridge.updateTodo", item.Id, !item.Completed);
+    }
+
+    private async Task EditTodo((string Id, string Text) args)
+    {
+        await JS.InvokeVoidAsync("blazorTodoBridge.editTodo", args.Id, args.Text);
+    }
+
+    private async Task DeleteTodo(string id)
+    {
+        await JS.InvokeVoidAsync("blazorTodoBridge.deleteTodo", id);
+    }
+
+    public void Dispose()
+    {
+        dotNetRef?.Dispose();
+    }
+}

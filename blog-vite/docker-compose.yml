@@ -4,6 +4,38 @@ services:
     ports:
       - "7777:7777"
     restart: unless-stopped
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          memory: 512M
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ollama-init:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: "no"
+    entrypoint: ["ollama", "pull", "qwen2.5:0.5b"]
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
 
   cloudflared:
     image: cloudflare/cloudflared:latest
@@ -14,3 +46,6 @@ services:
     restart: unless-stopped
     depends_on:
       - blog
+
+volumes:
+  ollama_data:

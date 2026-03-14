@@ -5,11 +5,13 @@ import { usePathname } from 'next/navigation';
 import ArticleIcon from '@mui/icons-material/Article';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
 
 const navItems = [
   { label: 'CV', href: '/cv', icon: <ArticleIcon fontSize="small" /> },
   { label: 'Chat', href: '/chat', icon: <SmartToyIcon fontSize="small" /> },
   { label: 'Retro', href: '/retro', icon: <AutoAwesomeIcon fontSize="small" /> },
+  { label: 'Micro FE', href: '/micro-fe', icon: <ViewModuleIcon fontSize="small" /> },
 ];
 
 export default function Header() {

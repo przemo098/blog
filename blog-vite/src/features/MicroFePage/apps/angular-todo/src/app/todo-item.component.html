@@ -1,0 +1,26 @@
+<li class="todo-item" data-testid="angular-todo-item">
+  <input
+    type="checkbox"
+    [checked]="item.completed"
+    (change)="toggle.emit(item)"
+  />
+  <span
+    *ngIf="!editing"
+    (dblclick)="startEdit()"
+    [class.completed]="item.completed"
+    class="todo-text"
+  >
+    {{ item.text }}
+  </span>
+  <input
+    *ngIf="editing"
+    data-testid="angular-todo-edit"
+    type="text"
+    [(ngModel)]="editText"
+    (keydown.enter)="saveEdit()"
+    (blur)="saveEdit()"
+    class="edit-input"
+  />
+  <button (click)="startEdit()" class="btn-icon">edit</button>
+  <button (click)="delete.emit(item.id)" class="btn-icon btn-delete">delete</button>
+</li>
