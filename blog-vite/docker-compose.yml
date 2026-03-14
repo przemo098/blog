@@ -1,0 +1,16 @@
+services:
+  blog:
+    build: .
+    ports:
+      - "7777:7777"
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --config /etc/cloudflared/config.yml run
+    volumes:
+      - ./cloudflared-config.yml:/etc/cloudflared/config.yml:ro
+      - ${CLOUDFLARED_CREDS:-C:/Users/Charman/.cloudflared/7350987f-fbcf-4e8c-ac5e-e26cc709fb42.json}:/etc/cloudflared/7350987f-fbcf-4e8c-ac5e-e26cc709fb42.json:ro
+    restart: unless-stopped
+    depends_on:
+      - blog

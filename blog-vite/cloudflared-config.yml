@@ -1,0 +1,9 @@
+tunnel: 7350987f-fbcf-4e8c-ac5e-e26cc709fb42
+credentials-file: /etc/cloudflared/7350987f-fbcf-4e8c-ac5e-e26cc709fb42.json
+
+ingress:
+  - hostname: kaminski.consulting
+    service: http://blog:7777
+  - hostname: "*.kaminski.consulting"
+    service: http://blog:7777
+  - service: http_status:404

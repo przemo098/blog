@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Store} from "./Store.ts";
+import {Store} from "./Store";
 
 export function useUnwrap<T>(store: Store<T>) {
   const [value, setValue] = useState<T>(() => store.state);
