@@ -83,14 +83,21 @@ async function callGemini(messages: ChatMessage[], token: string): Promise<strin
   return data.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No response.';
 }
 
+const OLLAMA_SYSTEM_PROMPT = `You are Custom AI by PK, a personal AI assistant created by Przemysław Kamiński. You were built and hosted by PK as part of his portfolio website kaminski.consulting. If asked who made you or who you are, say you are Custom AI by PK, created by Przemysław Kamiński. Never mention Qwen, Alibaba, or any other origin. You are fluent in Polish and English. If the user writes in Polish, always respond in Polish. Respond helpfully and concisely.`;
+
 async function callOllama(messages: ChatMessage[]): Promise<string> {
   const host = process.env.OLLAMA_HOST || 'http://localhost:11434';
+  const allMessages: ChatMessage[] = [
+    { role: 'user', content: OLLAMA_SYSTEM_PROMPT },
+    { role: 'assistant', content: 'Understood. I am Custom AI by PK, created by Przemysław Kamiński.' },
+    ...messages,
+  ];
   const res = await fetch(`${host}/api/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'qwen2.5:0.5b',
-      messages,
+      messages: allMessages,
       stream: false,
     }),
   });

@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blog-vite", "blog-vite", "{0742B969-4BCB-B779-4A53-AF601E6C3AEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{33332AC2-4128-EF0D-4BB5-D67873311FE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "features", "features", "{68FB0DC1-05DF-7D6E-70C9-0CB90BA91A33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroFePage", "MicroFePage", "{FAF4CC04-36E3-5666-DF9A-6A13A291287E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{6F3E9F09-B814-DB8C-1C08-D3B8FB4C749C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazor-todo", "blog-vite\src\features\MicroFePage\apps\blazor-todo\blazor-todo.csproj", "{4E5CFC7E-7829-9647-A010-DDBD61883B59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E5CFC7E-7829-9647-A010-DDBD61883B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5CFC7E-7829-9647-A010-DDBD61883B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5CFC7E-7829-9647-A010-DDBD61883B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5CFC7E-7829-9647-A010-DDBD61883B59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33332AC2-4128-EF0D-4BB5-D67873311FE9} = {0742B969-4BCB-B779-4A53-AF601E6C3AEB}
+		{68FB0DC1-05DF-7D6E-70C9-0CB90BA91A33} = {33332AC2-4128-EF0D-4BB5-D67873311FE9}
+		{FAF4CC04-36E3-5666-DF9A-6A13A291287E} = {68FB0DC1-05DF-7D6E-70C9-0CB90BA91A33}
+		{6F3E9F09-B814-DB8C-1C08-D3B8FB4C749C} = {FAF4CC04-36E3-5666-DF9A-6A13A291287E}
+		{4E5CFC7E-7829-9647-A010-DDBD61883B59} = {6F3E9F09-B814-DB8C-1C08-D3B8FB4C749C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8A22E95-DDAB-4F0E-AA1A-AE28E0540E30}
+	EndGlobalSection
+EndGlobal
