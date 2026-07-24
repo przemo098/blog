@@ -11,7 +11,7 @@ Internet → Cloudflare Tunnel → CV-Blog VM (micro) → Next.js standalone (po
                                     │
                                     └── OLLAMA_HOST=http://10.0.0.243:11434
                                               │
-                                              └── A1.Flex VM (Ollama, qwen2.5:3b)
+                                              └── A1.Flex VM (Ollama, qwen2.5:7b)
 ```
 
 ## VM: CV-Blog
@@ -94,7 +94,7 @@ curl https://kaminski.consulting
 | `PORT` | 7777 | Port serwera |
 | `HOSTNAME` | 0.0.0.0 | Nasłuchuje na wszystkich interfejsach |
 | `OLLAMA_HOST` | http://10.0.0.243:11434 | Ollama na A1.Flex (prywatne IP) |
-| `OLLAMA_MODEL` | qwen2.5:3b | Model Ollamy (opcjonalne; domyślnie `qwen2.5:3b` w kodzie) |
+| `OLLAMA_MODEL` | qwen2.5:7b | Model Ollamy (opcjonalne; domyślnie `qwen2.5:7b` w kodzie) |
 
 ### Cloudflare Tunnel
 
@@ -110,14 +110,29 @@ Micro VM ma 1GB swap (`/swapfile`) aby zapobiec OOM.
 
 Ollama działa na osobnej maszynie A1.Flex (130.61.127.59, 24GB RAM).
 Blog łączy się przez prywatne IP w VCN (10.0.0.243:11434).
-Model: `qwen2.5:3b` (~2GB) — asystent CV, skupiony wyłącznie na temacie
+Model: `qwen2.5:7b` (~4.7GB) — asystent CV, skupiony wyłącznie na temacie
 Przemysława Kamińskiego (system prompt po stronie serwera w `route.ts`).
+
+Odpowiedzi są **strumieniowane** (`/api/chat` zwraca strumień tekstu, front
+renderuje tokeny na żywo). Jest to konieczne, bo tunel Cloudflare zrywa
+połączenie (błąd 524), gdy origin milczy >100s. Backend na starcie strumienia
+flushuje jeden bajt (spację, obcinaną na froncie) — Cloudflare od razu dostaje
+odpowiedź 200 i nie zrywa połączenia, nawet gdy generacja 7B na CPU ARM trwa
+kilkadziesiąt sekund (ok. 15–90s zależnie od długości odpowiedzi; ~4,7 tok/s).
+
+Model utrzymywany jest ciepły przez:
+- `keep_alive: '30m'` w zapytaniach do Ollamy,
+- systemd timer **`blog-warm.timer`** (co 10 min woła `/api/chat` z „ping"
+  przez `localhost` — utrzymuje model w RAM i cache prefiksu promptu, dzięki
+  czemu realni odwiedzający trafiają w szybką ścieżkę zamiast zimnego startu
+  ~170s). Jednostki: `/usr/local/bin/blog-warm.sh`, `blog-warm.service`,
+  `blog-warm.timer`.
 
 Zmiana modelu wymaga pobrania go na maszynie A1.Flex:
 
 ```bash
 # Na A1.Flex VM (przez SSH):
-ollama pull qwen2.5:3b
+ollama pull qwen2.5:7b
 ollama list          # weryfikacja
 # opcjonalnie inny model bez zmiany kodu: ustaw OLLAMA_MODEL w blog.service
 ```

@@ -1,6 +1,7 @@
 'use client';
 
 import CvParagraph from './CvParagraph';
+import { getTechYears } from './techExperience';
 
 interface SkillGroupProps {
   title: string;
@@ -12,14 +13,27 @@ function SkillGroup({ title, skills }: SkillGroupProps) {
     <div>
       <h4 className="text-sm font-semibold text-slate-700 mb-2 m-0">{title}</h4>
       <div className="flex flex-wrap gap-1.5">
-        {skills.map((skill, i) => (
-          <span
-            key={i}
-            className="text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200 transition-colors"
-          >
-            {skill}
-          </span>
-        ))}
+        {skills.map((skill, i) => {
+          const years = getTechYears(skill);
+          return (
+            <span
+              key={i}
+              className={`inline-flex items-center gap-1 text-xs py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200 transition-colors ${
+                years != null ? 'pl-2.5 pr-1' : 'px-2.5'
+              }`}
+            >
+              {skill}
+              {years != null && (
+                <span
+                  className="text-[10px] font-bold text-white bg-slate-700 px-1.5 py-0.5 rounded-full"
+                  title={`~${years} years of experience`}
+                >
+                  {years}y
+                </span>
+              )}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
@@ -105,8 +119,8 @@ export default function CvQualifications() {
         <SkillGroup
           title="Finance domain"
           skills={[
-            'Capital markets', 'fintech', 'accounting systems', 'risk (FRTB, Basel III, CVA)', 'repo trading',
-            'regulated, mission-critical delivery',
+            'Mortgage & credit', 'trading', 'capital markets', 'fintech', 'accounting / ERP',
+            'risk reporting (FRTB, CVA)', 'regulated, mission-critical delivery',
           ]}
         />
 

@@ -1,4 +1,5 @@
 import { ISpecialization } from './data';
+import { getTechYears } from './techExperience';
 
 interface IProps {
   specialization?: ISpecialization;
@@ -36,14 +37,28 @@ export const Specialization = ({
           </div>
           {specialization.techStack && (
             <div className="flex flex-wrap gap-1 mt-2">
-              {specialization.techStack.split(',').map((tech, i) => (
-                <span
-                  key={i}
-                  className="text-xs px-2 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600"
-                >
-                  {tech.trim()}
-                </span>
-              ))}
+              {specialization.techStack.split(',').map((tech, i) => {
+                const name = tech.trim();
+                const years = getTechYears(name);
+                return (
+                  <span
+                    key={i}
+                    className={`inline-flex items-center gap-1 text-xs py-0.5 rounded-full bg-white border border-slate-200 text-slate-600 ${
+                      years != null ? 'pl-2 pr-0.5' : 'px-2'
+                    }`}
+                  >
+                    {name}
+                    {years != null && (
+                      <span
+                        className={`text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full ${colors.badge}`}
+                        title={`~${years} years of experience`}
+                      >
+                        {years}y
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>

@@ -23,15 +23,33 @@ const TOKEN_PLACEHOLDERS: Record<string, string> = {
   grok: 'xai-...',
 };
 
-async function callApi(provider: string, messages: Message[], token: string): Promise<string> {
+// Strumieniuje odpowiedź z /api/chat. onChunk dostaje narastający pełny tekst
+// (nie deltę), więc renderowanie sprowadza się do podmiany treści wiadomości.
+async function streamApi(
+  provider: string,
+  messages: Message[],
+  token: string,
+  onChunk: (accumulated: string) => void
+): Promise<string> {
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ provider, messages, token: token || undefined }),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || `API error (${res.status})`);
-  return data.reply;
+  if (!res.ok || !res.body) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || `API error (${res.status})`);
+  }
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let acc = '';
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    acc += decoder.decode(value, { stream: true });
+    onChunk(acc);
+  }
+  return acc;
 }
 
 export default function ChatPage() {
@@ -58,16 +76,30 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
-      let reply: string;
-
       if (provider !== 'none' && (provider === 'ollama' || token)) {
-        reply = await callApi(provider, newMessages, token);
+        let started = false;
+        await streamApi(provider, newMessages, token, (acc) => {
+          // Backend flushuje wiodącą spację (obejście 524) — obcinamy ją.
+          const text = acc.replace(/^\s+/, '');
+          if (!text) return;
+          setMessages((prev) => {
+            const copy = [...prev];
+            if (started) {
+              copy[copy.length - 1] = { role: 'assistant', content: text };
+            } else {
+              copy.push({ role: 'assistant', content: text });
+            }
+            return copy;
+          });
+          started = true;
+        });
+        if (!started) {
+          setMessages((prev) => [...prev, { role: 'assistant', content: 'No response.' }]);
+        }
       } else {
         await new Promise((r) => setTimeout(r, 600));
-        reply = DUMMY_RESPONSE;
+        setMessages((prev) => [...prev, { role: 'assistant', content: DUMMY_RESPONSE }]);
       }
-
-      setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
       setMessages((prev) => [
@@ -178,7 +210,7 @@ export default function ChatPage() {
               )}
             </div>
           ))}
-          {loading && (
+          {loading && messages[messages.length - 1]?.role !== 'assistant' && (
             <div className="flex gap-3">
               <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0">
                 <SmartToyIcon style={{ fontSize: 16, color: 'white' }} />

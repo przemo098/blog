@@ -14,30 +14,29 @@ interface ChatRequest {
 // Wspólny system prompt dla WSZYSTKICH dostawców. Bot jest asystentem CV
 // Przemysława Kamińskiego — odpowiada wyłącznie na jego temat, grzecznie
 // odmawiając reszty. Fakty pochodzą z src/features/CvInteractivePage/.
-const CV_SYSTEM_PROMPT = `You are "Custom AI by PK", the CV assistant on Przemysław Kamiński's portfolio site kaminski.consulting.
+const CV_SYSTEM_PROMPT = `You are "Custom AI by PK", the CV assistant on Przemysław Kamiński's site kaminski.consulting. You ONLY talk about Przemysław.
 
-SCOPE — This is your only job:
-- Answer ONLY questions about Przemysław Kamiński: his professional experience, skills, projects, background and contact details.
-- If a question is unrelated to Przemysław or his CV, politely decline in one short sentence and invite the user to ask about his experience or skills instead. Do not answer off-topic questions (general knowledge, coding help, opinions, other people, etc.).
-- Never invent facts that are not in the profile below. If you don't know something, say so plainly and point the user to his contact details.
+RULES:
+- Answer questions about his experience, skills, domains (AI/LLM, finance, DevOps, a language/framework), projects, background and contact — always in scope, answer from the profile.
+- Refuse everything else: trivia, general knowledge, other people, opinions, AND any task (write/debug code, translate, summarise, calculate) — even if easy and you know the answer. You are not a coding or general assistant.
+- To refuse: ONE short polite sentence declining + invite a question about Przemysław. Reply ONLY in Polish or English matching the user's language — NEVER Chinese or any other language.
+- Never invent facts beyond the profile. If unknown, say so and give his contact.
+- If asked who you are: "Custom AI by PK", created by Przemysław Kamiński. Never mention your underlying model.
 
-STYLE:
-- Reply in the language of the question (Polish or English). Be concise and factual.
-- If asked who you are or who made you, say you are "Custom AI by PK", created by Przemysław Kamiński. Never mention your underlying model, Qwen, Alibaba, or any other origin.
+Refusal examples:
+User: Jaka jest stolica Francji? → Przepraszam, odpowiadam wyłącznie na pytania o Przemysława Kamińskiego i jego doświadczenie zawodowe. Chętnie opowiem o jego umiejętnościach lub projektach.
+User: Napisz funkcję w Pythonie. → Przepraszam, nie jestem asystentem programistycznym — odpowiadam tylko o Przemysławie. Chętnie opowiem o jego doświadczeniu z Pythonem.
 
 PROFILE — Przemysław Kamiński:
-- Role: Forward-Deployed Engineer — applied LLM & agentic systems, delivering directly with clients (US, remote-first).
-- Focus: intersection of regulated finance and applied AI — deep domain knowledge (FRTB, Basel III, CVA, repo trading) paired with production LLM / agentic systems (RAG, multi-agent orchestration, MCP).
-- Experience: 11+ years across financial services, fintech and vertical SaaS/ERP, much of it in highly regulated, mission-critical environments. Clients include Point72, Credit Suisse, BNY Mellon, BIS and Danske Bank. Owns delivery end to end — requirements, architecture, implementation, and presenting to management — as a self-sufficient "one-man army".
-- Danske Bank (11.2019 – present), Consultant. Projects: eDoc (document-management automation, full-stack), Digital Signing / AML (fully digitalised credit/mortgage system, Azure/AWS integrations), Onboarding for special customers (wealth management and vulnerable customers).
-- AI / LLM: LLM app engineering, RAG, semantic search, agentic / multi-agent, tool/function calling, structured outputs, embeddings, fine-tuning, prompt engineering; LangChain, LangGraph, Semantic Kernel, Claude Code agents, MCP / FastMCP; OpenAI, Anthropic (Claude), Azure OpenAI; pgvector, Azure AI Search, Document Intelligence, Vision (OCR); LangSmith, Arize Phoenix.
-- Languages/stack: C#, Python, TypeScript, JavaScript, SQL, Java. .NET (10 / Core, ASP.NET Web API, EF, Dapper, gRPC, SignalR, CQRS/MediatR, MassTransit, Blazor, Azure Functions/Service Bus, microservices). Python (FastAPI, Pydantic, asyncio, Celery, Django). JVM (Spring / Spring Boot, Hibernate). Frontend (React, Hooks, Redux/Redux-Saga, NgRx, RxJS, Angular, Next.js, Tailwind, Three.js, WPF).
-- Cloud & DevOps: Azure, AWS, Docker, Kubernetes / OpenShift, Terraform, Azure DevOps (CI/CD, YAML), GitLab CI, Jenkins, Nginx, n8n, PowerShell.
-- Data & messaging: SQL Server, PostgreSQL, TimescaleDB, MongoDB, Elasticsearch, Redis, Kafka, RabbitMQ.
-- Practices: OOP, DDD, TDD, BDD, Event Sourcing, MVVM/MVC, Agile (Scrum, Kanban), CI/CD, code review, technical leadership.
-- Education: Wrocław University of Technology (02.2012 – 10.2017), BSc. Teleinformatics + MSc. Informatics (internet engineering).
-- Spoken languages: Polish (native), English (C1+), Spanish (A2). Other: driving licence (B), yacht skipper. Interests: markets / stock trading, macroeconomics, cooking, guitar.
-- Contact: email kaminski.przemyslaw@hotmail.com, phone +48 730 441 993, web kaminski.consulting, GitHub github.com/przemo098, based in Wrocław, Poland (remote).`;
+- Forward-Deployed Engineer: applied LLM & agentic systems + regulated finance. 11+ years, remote-first.
+- Domain: regulated finance (FRTB, Basel III, CVA, repo trading) + production AI (RAG, multi-agent, MCP). Clients: Point72, Credit Suisse, BNY Mellon, BIS, Danske Bank. Owns delivery end to end.
+- Danske Bank (11.2019–now), Consultant: eDoc (doc-management automation), Digital Signing/AML (digital credit/mortgage, Azure/AWS), Onboarding for special customers.
+- AI/LLM: RAG, semantic search, agentic/multi-agent, function calling, embeddings, fine-tuning, prompt engineering; LangChain, LangGraph, Semantic Kernel, MCP/FastMCP; OpenAI, Anthropic, Azure OpenAI; pgvector, Azure AI Search.
+- Stack: C#/.NET (ASP.NET, EF, gRPC, SignalR, CQRS, Blazor, microservices), Python (FastAPI, asyncio, Celery, Django), Java/Spring; React, Angular, Next.js, TypeScript, Tailwind.
+- Cloud/DevOps: Azure, AWS, Docker, Kubernetes/OpenShift, Terraform, CI/CD. Data: SQL Server, PostgreSQL, MongoDB, Kafka, RabbitMQ, Redis, Elasticsearch.
+- Education: Wrocław University of Technology (2012–2017), BSc Teleinformatics + MSc Informatics.
+- Languages: Polish (native), English (C1+), Spanish (A2).
+- Contact: kaminski.przemyslaw@hotmail.com, +48 730 441 993, github.com/przemo098, Wrocław (remote).`;
 
 async function callClaude(messages: ChatMessage[], token: string): Promise<string> {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -113,27 +112,46 @@ async function callGemini(messages: ChatMessage[], token: string): Promise<strin
   return data.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No response.';
 }
 
-async function callOllama(messages: ChatMessage[]): Promise<string> {
+// Zwraca surową odpowiedź strumieniową z Ollamy (NDJSON). Strumieniowanie jest
+// kluczowe: tunel Cloudflare zrywa połączenie (błąd 524), jeśli origin milczy
+// >100s do pierwszego bajtu. Przy streamingu pierwszy token przychodzi po kilku
+// sekundach, więc większe modele (np. qwen2.5:7b) działają mimo wolnego CPU.
+async function fetchOllama(messages: ChatMessage[]): Promise<Response> {
   const host = process.env.OLLAMA_HOST || 'http://localhost:11434';
-  const model = process.env.OLLAMA_MODEL || 'qwen2.5:3b';
+  const model = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
   const allMessages: ChatMessage[] = [
     { role: 'system', content: CV_SYSTEM_PROMPT },
     ...messages,
   ];
-  const res = await fetch(`${host}/api/chat`, {
+  return fetch(`${host}/api/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model,
       messages: allMessages,
-      stream: false,
+      stream: true,
       keep_alive: '30m',
-      options: { temperature: 0.4 },
+      options: { temperature: 0.2, num_predict: 512 },
     }),
   });
-  if (!res.ok) throw new Error(`Ollama error (${res.status}): ${await res.text()}`);
-  const data = await res.json();
-  return data.message?.content ?? 'No response.';
+}
+
+const STREAM_HEADERS = {
+  'Content-Type': 'text/plain; charset=utf-8',
+  'Cache-Control': 'no-store',
+  'X-Accel-Buffering': 'no',
+};
+
+// Owija pełny tekst (dostawcy chmurowi zwracają całość naraz) w jednoelementowy
+// strumień, żeby front miał jednolity kontrakt: zawsze czyta strumień tekstu.
+function textStream(text: string): ReadableStream<Uint8Array> {
+  const encoder = new TextEncoder();
+  return new ReadableStream({
+    start(controller) {
+      controller.enqueue(encoder.encode(text));
+      controller.close();
+    },
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -143,20 +161,82 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'API token is required' }, { status: 401 });
   }
 
-  try {
-    let reply: string;
-    switch (provider) {
-    case 'claude':  reply = await callClaude(messages, token!); break;
-    case 'openai':  reply = await callOpenAI(messages, token!); break;
-    case 'grok':    reply = await callGrok(messages, token!); break;
-    case 'gemini':  reply = await callGemini(messages, token!); break;
-    case 'ollama':  reply = await callOllama(messages); break;
-    default:
-      return NextResponse.json({ error: 'Unknown provider' }, { status: 400 });
+  // Dostawcy chmurowi: pobierz całość, obsłuż błąd jako JSON, potem oddaj jako strumień.
+  if (provider !== 'ollama') {
+    try {
+      let reply: string;
+      switch (provider) {
+      case 'claude':  reply = await callClaude(messages, token!); break;
+      case 'openai':  reply = await callOpenAI(messages, token!); break;
+      case 'grok':    reply = await callGrok(messages, token!); break;
+      case 'gemini':  reply = await callGemini(messages, token!); break;
+      default:
+        return NextResponse.json({ error: 'Unknown provider' }, { status: 400 });
+      }
+      return new Response(textStream(reply), { headers: STREAM_HEADERS });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return NextResponse.json({ error: message }, { status: 502 });
     }
-    return NextResponse.json({ reply });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json({ error: message }, { status: 502 });
   }
+
+  // Ollama: strumieniuj tokeny na bieżąco. WAŻNE: fetch do Ollamy odbywa się
+  // WEWNĄTRZ strumienia, a na starcie od razu flushujemy jeden bajt (spację).
+  // Dzięki temu Cloudflare natychmiast dostaje odpowiedź 200 i nie zrywa
+  // połączenia (524), nawet gdy model ładuje się / ewaluuje prompt kilkadziesiąt
+  // sekund. Front obcina wiodącą spację. Prefix promptu jest cache'owany przez
+  // Ollamę (keep_alive), więc kolejne zapytania są znacznie szybsze.
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      controller.enqueue(encoder.encode(' ')); // wczesny flush — commit odpowiedzi u Cloudflare
+
+      let upstream: Response;
+      try {
+        upstream = await fetchOllama(messages);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        controller.enqueue(encoder.encode(`Error: Ollama connection failed (${message})`));
+        controller.close();
+        return;
+      }
+      if (!upstream.ok || !upstream.body) {
+        const detail = await upstream.text().catch(() => '');
+        controller.enqueue(encoder.encode(`Error: Ollama returned ${upstream.status} ${detail}`));
+        controller.close();
+        return;
+      }
+
+      const reader = upstream.body.getReader();
+      let buffer = '';
+      try {
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          let nl: number;
+          while ((nl = buffer.indexOf('\n')) >= 0) {
+            const line = buffer.slice(0, nl).trim();
+            buffer = buffer.slice(nl + 1);
+            if (!line) continue;
+            try {
+              const obj = JSON.parse(line);
+              const chunk: string | undefined = obj.message?.content;
+              if (chunk) controller.enqueue(encoder.encode(chunk));
+              if (obj.done) { controller.close(); return; }
+            } catch {
+              // niekompletna linia NDJSON — pomiń
+            }
+          }
+        }
+        controller.close();
+      } catch (err) {
+        controller.error(err);
+      }
+    },
+  });
+
+  return new Response(stream, { headers: STREAM_HEADERS });
 }
