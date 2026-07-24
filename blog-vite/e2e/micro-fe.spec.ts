@@ -135,3 +135,30 @@ test('Micro FE — add/edit/delete across all 4 frameworks with shared state', a
   await expect(tid(page, 'vue-todo-item')).toHaveCount(0, { timeout: 3000 });
   await expect(tid(page, 'blazor-todo-item')).toHaveCount(0, { timeout: 3000 });
 });
+
+test('Micro FE — nawigacja client-side z /micro-fe nie wywala aplikacji', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('cv-guide-dismissed', 'true'));
+
+  const pageErrors: string[] = [];
+  page.on('pageerror', (e) => pageErrors.push(e.message));
+
+  await page.goto('/micro-fe');
+  await expect(tid(page, 'blazor-todo-input')).toBeVisible({ timeout: 30000 });
+
+  // Regresja: Blazor HeadOutlet ("head::after") usuwał <title> należący do Reacta
+  // (Next.js metadata = hoistable resource), przez co unmountHoistable() trafiał na
+  // parentNode === null i cała aplikacja padała przy wyjściu z /micro-fe.
+  await expect(page).toHaveTitle(/.+/);
+
+  for (const href of ['/retro', '/chat', '/cv']) {
+    await page.goto('/micro-fe');
+    await expect(tid(page, 'blazor-todo-input')).toBeVisible({ timeout: 30000 });
+
+    await page.click(`nav a[href="${href}"]`);
+    await expect(page).toHaveURL(new RegExp(`${href}$`));
+    await expect(page.locator('body')).not.toContainText('Application error');
+    await expect(page.locator('nav a[href="/micro-fe"]')).toBeVisible();
+  }
+
+  expect(pageErrors).toEqual([]);
+});

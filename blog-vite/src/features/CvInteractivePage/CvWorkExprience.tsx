@@ -34,6 +34,22 @@ const Block = (props: IWorkUnit) => {
           </p>
         )}
 
+        {props.highlights && props.highlights.length > 0 && (
+          <ul className="mt-2 mb-0 space-y-1 list-none pl-0">
+            {props.highlights.map((highlight, i) => (
+              <li key={i} className="flex gap-2 text-sm text-slate-600 leading-relaxed">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-800" />
+                <span>{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <Specialization
+          specialization={props.ai}
+          position="AI"
+          shouldDisplay={cvFilters.isAiSelected}
+        />
         <Specialization
           specialization={props.frontend}
           position="FE"

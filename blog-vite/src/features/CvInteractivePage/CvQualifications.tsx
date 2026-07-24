@@ -40,45 +40,80 @@ export default function CvQualifications() {
       <CvParagraph text="Qualifications" />
       <div className="space-y-5">
         <SkillGroup
-          title="Core Languages"
-          skills={['C#', 'TypeScript', 'JavaScript', 'SQL', 'HTML', 'CSS', 'YAML', 'Python', 'Java']}
-        />
-        <SkillGroup
-          title="Frameworks & Libraries"
+          title="AI / LLM"
           skills={[
-            'ASP.NET Core / 5', 'LINQ', 'SignalR', 'Entity Framework', 'ADO.NET',
-            'React', 'Angular', 'jQuery', 'Docker', 'RabbitMQ', 'Kafka',
-            'OpenID', 'OAuth2', 'WPF', 'UWP',
+            'LLM application engineering', 'RAG', 'semantic search', 'agentic / multi-agent',
+            'tool / function calling', 'structured outputs', 'embeddings', 'fine-tuning', 'prompt engineering',
+            'LangChain', 'LangGraph', 'Semantic Kernel', 'Claude Code agents', 'MCP / FastMCP',
+            'OpenAI', 'Anthropic (Claude)', 'Azure OpenAI', 'pgvector', 'Azure AI Search',
+            'Azure AI Document Intelligence', 'Azure AI Vision (OCR)', 'LangSmith', 'Arize Phoenix',
           ]}
         />
         <SkillGroup
-          title="Testing"
-          skills={['Jest', 'Jasmine', 'Karma', 'NUnit', 'Moq', 'SpecFlow', 'xUnit']}
+          title="Languages"
+          skills={['C#', 'Python', 'TypeScript', 'JavaScript', 'SQL', 'Java', 'HTML', 'CSS', 'YAML']}
         />
         <SkillGroup
-          title="Databases"
-          skills={['SQL Server', 'ElasticSearch', 'MongoDB', 'PostgreSQL', 'Oracle', 'Redis']}
+          title="Python"
+          skills={['FastAPI', 'Pydantic', 'async / asyncio', 'Celery', 'Django', 'Jupyter', 'Sentry']}
         />
         <SkillGroup
-          title="Tools"
+          title="Backend (.NET)"
           skills={[
-            'Visual Studio / Code', 'Rider', 'Jira', 'Jenkins', 'Git',
-            'TeamCity', 'npm', 'Webpack', 'Terraform',
+            '.NET 10 / .NET Core', 'ASP.NET Web API', 'Entity Framework', 'Dapper', 'LINQ', 'gRPC', 'SignalR',
+            'CQRS / MediatR', 'MassTransit', 'Serilog', 'Blazor', 'Azure Functions / Service Bus',
+            'microservices', 'REST', 'OAuth2 / OpenID',
+          ]}
+        />
+        <SkillGroup
+          title="Backend (JVM)"
+          skills={['Java', 'Java EE', 'Spring / Spring Boot', 'Hibernate', 'microservices', 'REST']}
+        />
+        <SkillGroup
+          title="Frontend"
+          skills={[
+            'React', 'Hooks', 'Redux', 'Redux-Saga', 'NgRx', 'RxJS', 'MobX', 'Angular', 'Next.js',
+            'TypeScript', 'Tailwind', 'Webpack', 'Three.js', 'WPF',
           ]}
         />
         <SkillGroup
           title="Cloud & DevOps"
-          skills={['Azure', 'AWS', 'Docker', 'Kubernetes', 'OpenShift', 'Azure DevOps CI/CD']}
+          skills={[
+            'Azure', 'AWS', 'Docker', 'Kubernetes / OpenShift', 'Terraform',
+            'Azure DevOps (CI/CD, YAML)', 'GitLab CI', 'Jenkins', 'Nginx', 'n8n', 'PowerShell',
+          ]}
         />
         <SkillGroup
-          title="Methodologies"
-          skills={['OOP', 'BDD', 'TDD', 'DDD', 'MVC', 'MVVM', 'Event Sourcing', 'Agile (Scrum, Kanban)', 'CI/CD']}
+          title="Data & messaging"
+          skills={[
+            'SQL Server', 'PostgreSQL', 'TimescaleDB', 'MongoDB', 'Elasticsearch', 'Redis', 'Kafka', 'RabbitMQ',
+          ]}
+        />
+        <SkillGroup
+          title="Testing"
+          skills={[
+            'Cypress', 'Playwright', 'Jest', 'Jasmine', 'Karma', 'xUnit', 'NUnit', 'Moq', 'NSubstitute', 'SpecFlow',
+          ]}
+        />
+        <SkillGroup
+          title="Practices"
+          skills={[
+            'OOP', 'DDD', 'TDD', 'BDD', 'Event Sourcing', 'MVVM / MVC', 'Agile (Scrum, Kanban)',
+            'CI/CD', 'code review', 'technical leadership',
+          ]}
+        />
+        <SkillGroup
+          title="Finance domain"
+          skills={[
+            'Capital markets', 'fintech', 'accounting systems', 'risk (FRTB, Basel III, CVA)', 'repo trading',
+            'regulated, mission-critical delivery',
+          ]}
         />
 
         <div className="border-t border-slate-100 pt-4 space-y-2">
-          <InfoRow label="Languages" value="Polish (Native) • English (C1+) • Spanish (A2)" />
-          <InfoRow label="Interests" value="Market / Stock trading • Mobile Phones • Bachata / Salsa" />
-          <InfoRow label="Other" value="Driver license (B) • Yacht skipper • Foosball player" />
+          <InfoRow label="Languages" value="Polish (native) • English (C1+) • Spanish (A2)" />
+          <InfoRow label="Interests" value="Markets / stock trading • Macroeconomics • Cooking • Guitar" />
+          <InfoRow label="Other" value="Driving licence (B) • Yacht skipper" />
         </div>
 
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">

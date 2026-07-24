@@ -46,6 +46,11 @@ export function CvFilters() {
         checked={cvFilters?.isDevOpsSelected}
         onChange={() => withScrollLock(() => CvSateController.switchDevOpsFilter())}
       />
+      <FilterToggle
+        label="AI/LLM"
+        checked={cvFilters?.isAiSelected}
+        onChange={() => withScrollLock(() => CvSateController.switchAiFilter())}
+      />
     </div>
   );
 }

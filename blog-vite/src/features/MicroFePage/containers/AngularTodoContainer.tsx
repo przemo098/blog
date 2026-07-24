@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function AngularTodoContainer() {
+  const rootRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -14,12 +15,26 @@ export default function AngularTodoContainer() {
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) script.parentNode.removeChild(script);
     };
   }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!loaded || !root) return;
+
+    const host = document.createElement('div');
+    const el = document.createElement('angular-todo-list');
+    host.appendChild(el);
+    root.appendChild(host);
+
+    return () => {
+      if (host.parentNode === root) root.removeChild(host);
+    };
+  }, [loaded]);
 
   if (error) return <p className="text-sm text-red-500">{error}</p>;
   if (!loaded) return <p className="text-sm text-slate-400 animate-pulse">Loading Angular...</p>;
 
-  return <div dangerouslySetInnerHTML={{ __html: '<angular-todo-list></angular-todo-list>' }} />;
+  return <div ref={rootRef} />;
 }

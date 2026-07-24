@@ -16,6 +16,9 @@
 # micro FE build artifacts
 /public/micro-fe/
 
+# Radar Przetargowy build artifact (generowany przez deploy.sh)
+/public/radar-app/
+
 # micro FE sub-project artifacts
 src/features/MicroFePage/apps/*/node_modules/
 src/features/MicroFePage/apps/*/dist/

@@ -28,7 +28,7 @@ export default function CvGuide() {
         steps: [
           {
             element: '#cv-filters',
-            intro: '<strong>Filter by specialization</strong><br/>Toggle <b>Frontend</b>, <b>Backend</b>, or <b>DevOps</b> to reveal detailed tech stacks and descriptions for each work position.',
+            intro: '<strong>Filter by specialization</strong><br/>Toggle <b>Frontend</b>, <b>Backend</b>, <b>DevOps</b>, or <b>AI/LLM</b> to reveal detailed tech stacks and descriptions for each work position.',
             position: 'bottom',
           },
           {

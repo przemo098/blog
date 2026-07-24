@@ -26,7 +26,7 @@ export default function CvHeader({ printRef }: CvHeaderProps) {
               Przemysław Kamiński
             </h1>
             <p className="text-slate-400 text-xs sm:text-sm mt-0.5 mb-0">
-              Senior Full Stack Developer & Consultant
+              Senior Full-Stack & AI Engineer
             </p>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 ml-2">

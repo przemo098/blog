@@ -29,6 +29,14 @@ cd "$SCRIPT_DIR"
 # cp -r bin/publish/wwwroot/* ../../../../../public/micro-fe/blazor/
 # cd "$SCRIPT_DIR"
 
+echo "=== 2.5/5 Building Radar Przetargowy (Vite SPA) ==="
+RADAR_FE="/home/charman/Repos/Wyszukiwarka_przetargow/frontend"
+( cd "$RADAR_FE" && pnpm install && VITE_BASE=/radar-app/ VITE_API_BASE=/radar pnpm build )
+rm -rf "$SCRIPT_DIR/public/radar-app"
+mkdir -p "$SCRIPT_DIR/public/radar-app"
+cp -r "$RADAR_FE/dist/"* "$SCRIPT_DIR/public/radar-app/"
+cd "$SCRIPT_DIR"
+
 echo "=== 3/5 Building Next.js ==="
 npm run build
 

@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import CvHeader from '@/features/CvInteractivePage/cvHeader';
 import CvWorkExperience from '@/features/CvInteractivePage/CvWorkExprience';
 import CvContact from '@/features/CvInteractivePage/CvContact';
+import CvSummary from '@/features/CvInteractivePage/CvSummary';
 import CvEducation from '@/features/CvInteractivePage/CvEducation';
 import CvQualifications from '@/features/CvInteractivePage/CvQualifications';
 import CvGuide from '@/features/CvInteractivePage/CvGuide';
@@ -20,6 +21,7 @@ export default function CV() {
         <div ref={printRef} className="bg-white rounded-none shadow-xl">
           <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
             <CvContact />
+            <CvSummary />
             <CvWorkExperience />
             <CvEducation />
             <CvQualifications />

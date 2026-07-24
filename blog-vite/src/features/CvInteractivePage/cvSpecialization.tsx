@@ -10,6 +10,7 @@ const colorMap: Record<string, { bg: string; border: string; badge: string }> = 
   FE: { bg: 'bg-blue-50', border: 'border-blue-200', badge: 'bg-blue-600' },
   BE: { bg: 'bg-emerald-50', border: 'border-emerald-200', badge: 'bg-emerald-600' },
   DevOps: { bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-600' },
+  AI: { bg: 'bg-violet-50', border: 'border-violet-200', badge: 'bg-violet-600' },
 };
 
 export const Specialization = ({

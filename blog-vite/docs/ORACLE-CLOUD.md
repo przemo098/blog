@@ -11,7 +11,7 @@ Internet → Cloudflare Tunnel → CV-Blog VM (micro) → Next.js standalone (po
                                     │
                                     └── OLLAMA_HOST=http://10.0.0.243:11434
                                               │
-                                              └── A1.Flex VM (Ollama, qwen2.5:0.5b)
+                                              └── A1.Flex VM (Ollama, qwen2.5:3b)
 ```
 
 ## VM: CV-Blog
@@ -94,6 +94,7 @@ curl https://kaminski.consulting
 | `PORT` | 7777 | Port serwera |
 | `HOSTNAME` | 0.0.0.0 | Nasłuchuje na wszystkich interfejsach |
 | `OLLAMA_HOST` | http://10.0.0.243:11434 | Ollama na A1.Flex (prywatne IP) |
+| `OLLAMA_MODEL` | qwen2.5:3b | Model Ollamy (opcjonalne; domyślnie `qwen2.5:3b` w kodzie) |
 
 ### Cloudflare Tunnel
 
@@ -109,7 +110,20 @@ Micro VM ma 1GB swap (`/swapfile`) aby zapobiec OOM.
 
 Ollama działa na osobnej maszynie A1.Flex (130.61.127.59, 24GB RAM).
 Blog łączy się przez prywatne IP w VCN (10.0.0.243:11434).
-Model: `qwen2.5:0.5b` (494M parametrów, ~400MB).
+Model: `qwen2.5:3b` (~2GB) — asystent CV, skupiony wyłącznie na temacie
+Przemysława Kamińskiego (system prompt po stronie serwera w `route.ts`).
+
+Zmiana modelu wymaga pobrania go na maszynie A1.Flex:
+
+```bash
+# Na A1.Flex VM (przez SSH):
+ollama pull qwen2.5:3b
+ollama list          # weryfikacja
+# opcjonalnie inny model bez zmiany kodu: ustaw OLLAMA_MODEL w blog.service
+```
+
+Model utrzymywany jest „ciepły" w RAM przez 30 min (`keep_alive`), więc kolejne
+pytania po krótkiej przerwie odpowiadają szybciej.
 
 ## Troubleshooting
 
