@@ -130,9 +130,9 @@ export default function CvQualifications() {
           <InfoRow label="Other" value="Driving licence (B) • Yacht skipper" />
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-          <h4 className="text-sm font-semibold text-amber-800 m-0 mb-1">Achievement</h4>
-          <p className="text-sm text-amber-700 m-0">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-slate-700 m-0 mb-1">Achievement</h4>
+          <p className="text-sm text-slate-600 m-0">
             Architect / Developer / Team leader in University project for Capgemini.
             Project won main prize in &ldquo;Team engineering competition&rdquo; at Wrocław University of Technology
             (Web multiplayer game - Ships). Used: ASP.NET MVC, Entity Framework, LINQ, SignalR, JavaScript.

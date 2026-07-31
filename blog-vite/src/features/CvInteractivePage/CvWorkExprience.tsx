@@ -15,9 +15,11 @@ const Block = (props: IWorkUnit) => {
   const dateRange = parts?.[2]?.trim();
 
   return (
-    <div data-cv-block className="relative pl-7 pb-6 border-l-2 border-slate-300 last:pb-0">
+    <div data-cv-block className="group relative pl-7 pb-6 last:pb-0">
+      {/* Timeline line — trimmed to start/end at the dot for the first/last item */}
+      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-slate-300 group-first:top-6 group-last:bottom-[calc(100%-1.5rem)]" />
       {/* Timeline dot */}
-      <div className="absolute -left-[5px] top-6 w-2 h-2 rounded-full bg-slate-800" />
+      <div className="absolute -left-[3px] top-6 w-2 h-2 rounded-full bg-slate-800" />
 
       <div className="bg-slate-50 rounded-xl p-4 hover:shadow-md transition-shadow">
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
